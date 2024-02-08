@@ -157,7 +157,7 @@ export default async function Header() {
                 <div className="elementor-widget-container">
                   <div className="wpr-button-wrap elementor-clearfix">
                     {login === false ? (
-                      <a
+                      <Link
                         className="wpr-button wpr-button-effect wpr-button-none"
                         data-text="Go"
                         href="/api/auth/login"
@@ -168,7 +168,7 @@ export default async function Header() {
                             <i className="fas fa-arrow-circle-right"></i>
                           </span>
                         </span>
-                      </a>
+                      </Link>
                     ) : (
                       <Link
                         className="wpr-button wpr-button-effect wpr-button-none"
