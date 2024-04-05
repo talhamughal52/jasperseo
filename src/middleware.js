@@ -1,8 +1,14 @@
-// middleware.js
-import { withMiddlewareAuthRequired } from "@auth0/nextjs-auth0/edge";
-
-export default withMiddlewareAuthRequired();
-
+import { authMiddleware } from "@clerk/nextjs";
+export default authMiddleware({
+  publicRoutes: [
+    "/",
+    "/about",
+    "/pricing",
+    "/contact",
+    "/api/webhooks/clerk",
+    "/api/webhooks/stripe",
+  ],
+});
 export const config = {
-  matcher: ["/home", "/profile"],
+  matcher: ["/((?!.+.[w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };

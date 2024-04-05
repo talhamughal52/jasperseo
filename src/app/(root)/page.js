@@ -1,4 +1,4 @@
-import "../css/home.css";
+import "@/css/home.css";
 import Link from "next/link";
 export default function Home() {
   return (

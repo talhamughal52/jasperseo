@@ -31,3 +31,13 @@ body {
     text-wrap: balance;
   }
 } */
+
+.auth {
+  min-height: 100vh;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 247 254 / var(--tw-bg-opacity));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,6 +1,6 @@
 // "use client";
 import Box from "@/components/Box";
-import "../../css/about.css";
+import "@/css/about.css";
 import Link from "next/link";
 // import { useEffect, useRef } from "react";
 function page() {

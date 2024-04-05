@@ -1,6 +1,6 @@
 import "../css/header.css";
 import Link from "next/link";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 export default async function Header() {
   return (
     <div
@@ -152,18 +152,7 @@ export default async function Header() {
                 <div className="elementor-widget-container">
                   <div className="wpr-button-wrap elementor-clearfix">
                     <SignedIn>
-                      <Link
-                        className="wpr-button wpr-button-effect wpr-button-none"
-                        data-text="Go"
-                        href="/home"
-                      >
-                        <span className="wpr-button-content">
-                          <span className="wpr-button-text">Start Free</span>
-                          <span className="wpr-button-icon">
-                            <i className="fas fa-arrow-circle-right"></i>
-                          </span>
-                        </span>
-                      </Link>
+                      <UserButton afterSignOutUrl="/" />
                     </SignedIn>
 
                     <SignedOut>
@@ -180,6 +169,34 @@ export default async function Header() {
                         </span>
                       </Link>
                     </SignedOut>
+
+                    {/* {login === false ? (
+                      <Link
+                        className="wpr-button wpr-button-effect wpr-button-none"
+                        data-text="Go"
+                        href="/sign-in"
+                      >
+                        <span className="wpr-button-content">
+                          <span className="wpr-button-text">Start Free</span>
+                          <span className="wpr-button-icon">
+                            <i className="fas fa-arrow-circle-right"></i>
+                          </span>
+                        </span>
+                      </Link>
+                    ) : (
+                      <Link
+                        className="wpr-button wpr-button-effect wpr-button-none"
+                        data-text="Go"
+                        href="/home"
+                      >
+                        <span className="wpr-button-content">
+                          <span className="wpr-button-text">Go To Home</span>
+                          <span className="wpr-button-icon">
+                            <i className="fas fa-arrow-circle-right"></i>
+                          </span>
+                        </span>
+                      </Link>
+                    )} */}
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import Box from "@/components/Box";
-import "../../css/contact.css"
+import "@/css/contact.css"
 
 export default function page() {
   return (
