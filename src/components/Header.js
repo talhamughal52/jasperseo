@@ -1,7 +1,10 @@
-import "../css/header.css";
+"use client";
+import "@/css/header.css";
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-export default async function Header() {
+import { usePathname } from "next/navigation";
+export default function Header() {
+  const pathname = usePathname();
   return (
     <div
       data-elementor-type="wp-post"
@@ -62,7 +65,9 @@ export default async function Header() {
                         <Link
                           href="/"
                           aria-current="page"
-                          className="wpr-menu-item wpr-pointer-item wpr-active-menu-item"
+                          className={`wpr-menu-item wpr-pointer-item ${
+                            pathname === "/" ? "wpr-active-menu-item" : null
+                          }`}
                         >
                           Home
                         </Link>
@@ -70,7 +75,11 @@ export default async function Header() {
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-752">
                         <Link
                           href="/about"
-                          className="wpr-menu-item wpr-pointer-item"
+                          className={`wpr-menu-item wpr-pointer-item ${
+                            pathname === "/about"
+                              ? "wpr-active-menu-item"
+                              : null
+                          }`}
                         >
                           About
                         </Link>
@@ -78,7 +87,11 @@ export default async function Header() {
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-1189">
                         <Link
                           href="/pricing"
-                          className="wpr-menu-item wpr-pointer-item"
+                          className={`wpr-menu-item wpr-pointer-item ${
+                            pathname === "/pricing"
+                              ? "wpr-active-menu-item"
+                              : null
+                          }`}
                         >
                           Pricing
                         </Link>
@@ -86,7 +99,11 @@ export default async function Header() {
                       <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-1191">
                         <Link
                           href="/contact"
-                          className="wpr-menu-item wpr-pointer-item"
+                          className={`wpr-menu-item wpr-pointer-item ${
+                            pathname === "/contact"
+                              ? "wpr-active-menu-item"
+                              : null
+                          }`}
                         >
                           Contact
                         </Link>
