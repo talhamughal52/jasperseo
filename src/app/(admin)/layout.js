@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+import UserFooter from "@/components/UserFooter";
 import UserHeader from "@/components/UserHeader";
 import { getUserById } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
@@ -13,7 +13,7 @@ const Layout = async ({ children }) => {
     <>
       <UserHeader />
       {children}
-      <Footer />
+      <UserFooter />
     </>
   );
 };

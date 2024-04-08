@@ -1,11 +1,11 @@
-import Footer from "@/components/Footer";
+import UserFooter from "@/components/UserFooter";
 import UserHeader from "@/components/UserHeader";
 const Layout = ({ children }) => {
   return (
     <>
       <UserHeader />
       {children}
-      <Footer />
+      <UserFooter />
     </>
   );
 };
