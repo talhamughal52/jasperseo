@@ -2,6 +2,11 @@ import "./globals.css";
 import "../jasperseoCSS/index.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import NextTopLoader from "nextjs-toploader";
+import "jsvectormap/dist/css/jsvectormap.css";
+import "flatpickr/dist/flatpickr.min.css";
+import "@/css/style.css";
+import "@/css/satoshi.css";
+
 export const metadata = {
   title: "Jasper SEO",
   description:
@@ -15,6 +20,7 @@ export default function RootLayout({ children }) {
         <body
           className="home page-template page-template-elementor_canvas page page-id-747 wp-custom-logo wp-embed-responsive elementor-default elementor-template-canvas elementor-kit-57 elementor-page elementor-page-747 e--ua-blink e--ua-chrome e--ua-mac e--ua-webkit"
           data-elementor-device-mode="desktop"
+          suppressHydrationWarning={true}
         >
           <NextTopLoader showSpinner={false} />
           {children}

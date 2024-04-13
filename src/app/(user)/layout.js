@@ -1,12 +1,13 @@
-import UserFooter from "@/components/UserFooter";
-import UserHeader from "@/components/UserHeader";
+import AuthLayout from "@/components/AuthLayout";
+import AuthWrapper from "@/components/AuthWrapper";
+
 const Layout = ({ children }) => {
   return (
-    <>
-      <UserHeader />
-      {children}
-      <UserFooter />
-    </>
+    <div className="dark:bg-boxdark-2 dark:text-bodydark">
+      <AuthWrapper>
+        <AuthLayout>{children}</AuthLayout>
+      </AuthWrapper>
+    </div>
   );
 };
 
