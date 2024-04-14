@@ -5,8 +5,11 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import SidebarLinkGroup from "./SidebarLinkGroup";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const isAdmin = useSelector((state) => state.isAdmin.value);
+  // console.log(isAdmin);
   const pathname = usePathname();
 
   const trigger = useRef(null);

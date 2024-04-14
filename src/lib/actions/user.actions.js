@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import { auth } from "@clerk/nextjs";
 
 // CREATE
 export async function createUser(user) {
@@ -68,6 +69,23 @@ export async function deleteUser(clerkId) {
     revalidatePath("/");
 
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// isAdmin
+export async function isAdminUser() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let isAdmin = false;
+    // Find user to delete
+    const user = await getUserById(userId);
+    if (user.isAdmin) {
+      isAdmin = true;
+    }
+    return JSON.parse(JSON.stringify(isAdmin));
   } catch (error) {
     handleError(error);
   }

@@ -1,20 +1,20 @@
-import { getUserById } from "@/lib/actions/user.actions";
-import { auth } from "@clerk/nextjs";
+import { isAdminUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import AuthLayout from "@/components/AuthLayout";
 import AuthWrapper from "@/components/AuthWrapper";
+import StoreProvider from "@/store/StoreProvider";
 
 const Layout = async ({ children }) => {
-  const { userId } = auth();
-  if (!userId) redirect("/sign-in");
-  const user = await getUserById(userId);
-  if (!user.isAdmin) redirect("/home");
+  const isAdmin = await isAdminUser();
+  if (!isAdmin) redirect("/home");
 
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
-      <AuthWrapper>
-        <AuthLayout>{children}</AuthLayout>
-      </AuthWrapper>
+      <StoreProvider>
+        <AuthWrapper isAdmin={isAdmin}>
+          <AuthLayout>{children}</AuthLayout>
+        </AuthWrapper>
+      </StoreProvider>
     </div>
   );
 };
