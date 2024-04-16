@@ -1,5 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import "@/jasperseoCSS/index.css";
+
 const Layout = ({ children }) => {
   return (
     <>

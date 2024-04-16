@@ -1,5 +1,4 @@
 import "./globals.css";
-import "../jasperseoCSS/index.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import NextTopLoader from "nextjs-toploader";
 import "jsvectormap/dist/css/jsvectormap.css";
