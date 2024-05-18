@@ -20,7 +20,7 @@ const page = () => {
           </p>
           <div class="flex justify-center items-baseline my-8">
             <span class="mr-2 text-5xl font-extrabold">$9.99</span>
-            <span class="text-gray-500 dark:text-gray-400">/month</span>
+            <span class="text-gray-500 dark:text-gray-400">/ month</span>
           </div>
 
           <ul role="list" class="mb-8 space-y-4 text-left">
@@ -130,7 +130,7 @@ const page = () => {
           </p>
           <div class="flex justify-center items-baseline my-8">
             <span class="mr-2 text-5xl font-extrabold">$19.99</span>
-            <span class="text-gray-500 dark:text-gray-400">/month</span>
+            <span class="text-gray-500 dark:text-gray-400">/ month</span>
           </div>
 
           <ul role="list" class="mb-8 space-y-4 text-left">
@@ -240,7 +240,7 @@ const page = () => {
           </p>
           <div class="flex justify-center items-baseline my-8">
             <span class="mr-2 text-5xl font-extrabold">$49.99</span>
-            <span class="text-gray-500 dark:text-gray-400">/month</span>
+            <span class="text-gray-500 dark:text-gray-400">/ month</span>
           </div>
 
           <ul role="list" class="mb-8 space-y-4 text-left">
