@@ -12,7 +12,6 @@ import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const isAdmin = useSelector((state) => state.isAdmin.value);
-  console.log(isAdmin);
   const pathname = usePathname();
 
   const trigger = useRef(null);
