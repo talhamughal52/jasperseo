@@ -80,12 +80,27 @@ export async function isAdminUser() {
     const { userId } = auth();
     await connectToDatabase();
     let isAdmin = false;
-    // Find user to delete
+    // Find Admin user
     const user = await getUserById(userId);
     if (user.isAdmin) {
       isAdmin = true;
     }
     return JSON.parse(JSON.stringify(isAdmin));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// READ ALL
+export async function getUsers() {
+  try {
+    await connectToDatabase();
+
+    const users = await User.find({});
+
+    // if (!users) throw new Error("Users not found");
+
+    return JSON.parse(JSON.stringify(users));
   } catch (error) {
     handleError(error);
   }

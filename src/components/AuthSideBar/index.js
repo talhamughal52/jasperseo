@@ -108,17 +108,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <ul className="mb-6 flex flex-col gap-1.5">
                 <SidebarLinkGroup
                   activeCondition={
-                    pathname === "/" || pathname.includes("dashboard")
+                    pathname === "/" ||
+                    pathname.includes("dashboard") ||
+                    pathname.includes("users")
                   }
                 >
                   {(handleClick, open) => {
                     return (
                       <React.Fragment>
-                        <Link
+                        <span
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                             (pathname === "/" ||
-                              pathname.includes("dashboard")) &&
+                              pathname.includes("dashboard") ||
+                              pathname.includes("users")) &&
                             "bg-graydark dark:bg-meta-4"
                           }`}
                           onClick={(e) => {
@@ -171,7 +174,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                               fill=""
                             />
                           </svg>
-                        </Link>
+                        </span>
                         <div
                           className={`translate transform overflow-hidden ${
                             !open && "hidden"
@@ -180,12 +183,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
-                                href="/"
+                                href="/dashboard"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname === "/" && "text-white"
+                                  pathname === "/dashboard" && "text-white"
                                 }`}
                               >
-                                eCommerce
+                                Home
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="/users"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname === "/users" && "text-white"
+                                }`}
+                              >
+                                Users
                               </Link>
                             </li>
                           </ul>
@@ -738,7 +751,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <ul className="mb-6 flex flex-col gap-1.5">
                 <SidebarLinkGroup
                   activeCondition={
-                    pathname === "/" || pathname.includes("home")
+                    pathname === "/" ||
+                    pathname.includes("home") ||
+                    pathname.includes("editor")
                   }
                 >
                   {(handleClick, open) => {
@@ -747,7 +762,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         <span
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 cursor-pointer ${
-                            (pathname === "/home" || pathname === "/editor" ||
+                            (pathname === "/home" ||
+                              pathname === "/editor" ||
                               pathname.includes("home")) &&
                             "bg-graydark dark:bg-meta-4"
                           }`}
