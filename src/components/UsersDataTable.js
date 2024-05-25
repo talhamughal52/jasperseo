@@ -21,7 +21,6 @@ const UsersDataTable = ({ users }) => {
 
   useEffect(() => {
     const result = users.filter((user) => {
-      console.log(search);
       return user.username.toLowerCase().includes(search.toLowerCase()) || `${user.firstName} ${user.lastName}`.toLowerCase().includes(search.toLowerCase()) || user.email.toLowerCase().includes(search.toLowerCase());
     });
 
