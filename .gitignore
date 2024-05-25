@@ -128,3 +128,4 @@ dist
 
 # VS Code Debugger directories
 .vscode/
+.idea/
