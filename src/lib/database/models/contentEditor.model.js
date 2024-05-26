@@ -32,9 +32,6 @@ const ContentEditorSchema = new Schema(
     },
   },
   { timestamps: true },
-  {
-    suppressReservedKeysWarning: true,
-  }
 );
 
 const ContentEditor =
