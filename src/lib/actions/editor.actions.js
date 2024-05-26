@@ -1,7 +1,7 @@
 "use server";
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
-import ContentEditor from "../database/models/ContentEditor.model";
+import ContentEditor from "@/lib/database/models/contentEditor.model";
 import { auth } from "@clerk/nextjs";
 import { getUserById } from "./user.actions";
 import { useRouter, redirect } from "next/navigation";
