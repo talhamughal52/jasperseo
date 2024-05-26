@@ -11,7 +11,7 @@ const ContentEditorDataTable = ({ contentEditors }) => {
   const columns = [
     {
       name: "Keyword",
-      selector: (row) => row.keyword,
+      selector: (row) => <Link href={`/editor/${row._id}`}>{row.keyword}</Link>,
     },
     {
       name: "Country",
