@@ -38,6 +38,6 @@ const ContentEditorSchema = new Schema(
 );
 
 const ContentEditor =
-  models?.Content_Editor || model("Content_Editor", ContentEditorSchema);
+  models?.ContentEditor || model("ContentEditor", ContentEditorSchema);
 
 export default ContentEditor;
