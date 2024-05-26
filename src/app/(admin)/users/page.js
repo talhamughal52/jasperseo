@@ -1,9 +1,19 @@
-import UsersDataTable from "@/components/UsersDataTable";
-import { getUsers } from "@/lib/actions/user.actions";
+import { Suspense } from "react";
+import { UsersDataTableLoader } from "@/components/UsersDataTable";
+import UsersDataTableWrapper from "@/components/UsersDataTableWrapper";
 
-const page = async () => {
-  const users = await getUsers();
-  return <UsersDataTable users={users} />;
+const page = () => {
+  return (
+    <Suspense
+      fallback={
+        <>
+          <UsersDataTableLoader />
+        </>
+      }
+    >
+      <UsersDataTableWrapper />
+    </Suspense>
+  );
 };
 
 export default page;

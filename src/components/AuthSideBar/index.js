@@ -840,7 +840,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                   pathname === "/editor" && "text-white"
                                 }`}
                               >
-                                Editor
+                                Content Editor
                               </Link>
                             </li>
                           </ul>
