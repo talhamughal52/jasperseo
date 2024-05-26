@@ -55,7 +55,7 @@ const ContentEditorDataTable = ({ contentEditors }) => {
           />
           <Link
             href="/editor/create"
-            className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:text-white`}
+            className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:bg-opacity-90`}
           >
             Create Editor
           </Link>
@@ -125,7 +125,7 @@ export const ContentEditorDataTableLoader = () => {
           />
           <Link
             href="/editor/create"
-            className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:text-white`}
+            className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:bg-opacity-90`}
           >
             Create Editor
           </Link>

@@ -5,6 +5,8 @@ import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createEditor } from "@/lib/actions/editor.actions";
+import { toast } from "react-toastify";
+
 const ContentEditorForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -12,6 +14,7 @@ const ContentEditorForm = () => {
     setIsLoading(true);
     setTimeout(async () => {
       await createEditor(event);
+      toast.success("keyword is in queue. It can take upto 5min");
       router.push("/editor");
     }, 1000);
   };
@@ -64,7 +67,7 @@ const ContentEditorForm = () => {
                   className="w-full flex"
                   style={{ justifyContent: "end", alignItems: "end" }}
                 >
-                  <div className="flex justify-center rounded bg-primary font-medium text-gray hover:bg-opacity-90">
+                  <div className="flex justify-center rounded bg-black font-medium text-white hover:bg-opacity-90">
                     {isLoading ? (
                       <div
                         className="flex p-3 justify-center"

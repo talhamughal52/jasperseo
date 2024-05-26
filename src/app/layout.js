@@ -5,6 +5,8 @@ import "jsvectormap/dist/css/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "@/css/style.css";
 import "@/css/satoshi.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Jasper SEO",
@@ -22,6 +24,7 @@ export default function RootLayout({ children }) {
           suppressHydrationWarning={true}
         >
           <NextTopLoader showSpinner={false} />
+          <ToastContainer />
           {children}
         </body>
       </html>
