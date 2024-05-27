@@ -1,55 +1,52 @@
 "use client";
-import { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import TextEditor from "@/components/TextEditor";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 
 const page = () => {
-  const [content, setContent] = useState();
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ size: ["small", false, "large", "huge"] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ indent: "-1" }, { indent: "+1" }],
-      //   ["clean"],
-    ],
-    clipboard: {
-      matchVisual: false,
-    },
-  };
-  const formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-  ];
+  const [value, setValue] = React.useState("1");
 
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <div>
-      <ReactQuill
-        modules={modules}
-        placeholder="Write Blog Here"
-        formats={formats}
-        theme="snow"
-        style={{ height: "75vh" }}
-        value={content}
-        onChange={setContent}
-      />
+    <div className="flex">
+      <TextEditor />
+      <div
+        class="col m3 s12"
+        style={{ overflow: "scroll", height: "100vh", width: "30%" }}
+      >
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="GUIDLINES" value="1" />
+                <Tab
+                  label={
+                    <div className="flex">
+                      <span>OUTLINE</span>
+                      <span className="bg-red text-white px-1 ml-2">BETA</span>
+                    </div>
+                  }
+                  value="2"
+                />
+                <Tab label="BRIEF" value="3" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">Item One</TabPanel>
+            <TabPanel value="2">Item Two</TabPanel>
+            <TabPanel value="3">Item Three</TabPanel>
+          </TabContext>
+        </Box>
+      </div>
     </div>
   );
 };
