@@ -45,9 +45,10 @@ const TextEditor = () => {
       placeholder="Write Blog Here"
       formats={formats}
       theme="snow"
-      style={{ height: "75vh", width: "70%" }}
+      style={{ height: "75vh", width: "69%" }}
       value={content}
       onChange={setContent}
+      className="dark:text-white"
     />
   );
 };

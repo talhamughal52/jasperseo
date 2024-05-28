@@ -46,3 +46,17 @@ export async function getUserEditors() {
     handleError(error);
   }
 }
+
+export async function getEditorById(editorId) {
+  try {
+    await connectToDatabase();
+
+    const contentEditor = await ContentEditor.findOne({ _id: editorId });
+
+    if (!contentEditor) throw new Error("Content Editor not found");
+
+    return JSON.parse(JSON.stringify(contentEditor));
+  } catch (error) {
+    handleError(error);
+  }
+}
