@@ -110,7 +110,7 @@ export async function getEditorById(editorId) {
 
     if (!contentEditor) throw new Error("Content Editor not found");
 
-    if (contentEditor.status == "error") {
+    if (contentEditor.status == "error" || contentEditor.status == "start") {
       await setupInitialEditor(contentEditor);
     }
     return JSON.parse(JSON.stringify(contentEditor));

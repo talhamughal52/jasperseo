@@ -72,15 +72,11 @@ const TextEditor = ({ contentEditor, setCount, tokens }) => {
     setCount(count);
   };
 
-  useEffect(() => {
-    let editorContent = content ? content : "";
-    tagsAnalysis(editorContent);
-  }, [content]);
-
   let timer = null;
   const handleChange = (value) => {
     let editorContent = value ? value : "";
     tagsAnalysis(editorContent);
+    setContent(editorContent);
     clearTimeout(timer);
     timer = setTimeout(() => {
       saveEditorContent(contentEditor._id, value);
