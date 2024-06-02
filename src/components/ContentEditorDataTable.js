@@ -11,7 +11,9 @@ const ContentEditorDataTable = ({ contentEditors }) => {
   const columns = [
     {
       name: "Keyword",
-      selector: (row) => <Link href={`/editor/${row._id}`}>{row.keyword}</Link>,
+      selector: (row) => (
+        <Link href={`/editor/${row._id}/loading`}>{row.keyword}</Link>
+      ),
     },
     {
       name: "Country",
@@ -20,6 +22,10 @@ const ContentEditorDataTable = ({ contentEditors }) => {
     {
       name: "Country Code",
       selector: (row) => row.countryCode,
+    },
+    {
+      name: "Status",
+      selector: (row) => row.status,
     },
   ];
 
@@ -93,6 +99,17 @@ export const ContentEditorDataTableLoader = () => {
     },
     {
       name: "Country Code",
+      selector: (row) => (
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          width={210}
+          height={40}
+        />
+      ),
+    },
+    {
+      name: "Status",
       selector: (row) => (
         <Skeleton
           variant="rectangular"

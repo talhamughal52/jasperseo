@@ -9,12 +9,174 @@ import TabPanel from "@mui/lab/TabPanel";
 import LinearProgress from "@mui/material/LinearProgress";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 import SettingsIcon from "@mui/icons-material/Settings";
+import Tooltip from "@mui/material/Tooltip";
 
-const TextEditorLeftSide = ({ contentEditor }) => {
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Button from "@mui/material/Button";
+
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
+import ExamplePopupModal from "./ExamplePopupModal";
+import { handlecompatitorsChange } from "@/lib/actions/editor.actions";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+const TextEditorLeftSide = ({
+  contentEditor,
+  structure,
+  importantTopics,
+  nlp_tokens,
+  outline,
+  websites,
+  topwebsites,
+  count,
+}) => {
   const [value, setValue] = useState("1");
+  const [subValue, setSubValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleSubChange = (event, newValue) => {
+    setSubValue(newValue);
+  };
+
+  const [isBottom, setIsBottom] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setIsBottom(open);
+  };
+
+  const list = (contentEditor) => {
+    const router = useRouter();
+    const [tabValue, setTabValue] = useState("1");
+    const handleChange = (event, newValue) => {
+      setTabValue(newValue);
+    };
+    const handleSubmit = async (event) => {
+      const response = await handlecompatitorsChange(event);
+      router.push(`/editor/${contentEditor._id}/loading`);
+    };
+    return (
+      <Box
+        sx={{ width: "100%", zIndex: "9999999" }}
+        role="presentation"
+        // onClick={toggleDrawer(false)}
+        // onKeyDown={toggleDrawer(false)}
+      >
+        <TabContext value={tabValue}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Tab label="Compatitors" value="1" />
+              <Tab
+                label={
+                  <div className="flex">
+                    <span>Compatitors Terms</span>
+                    <span className="bg-red text-white px-1 ml-2">BETA</span>
+                  </div>
+                }
+                value="2"
+              />
+            </TabList>
+          </Box>
+          <TabPanel value="1">
+            <div
+              id="compatitors"
+              className="col s12"
+              style={{ display: "block" }}
+            >
+              <h4 className="text-lg font-semibold">Settings</h4>
+              <h6 className="text-base font-semibold">Url</h6>
+              <form action={handleSubmit} method="post">
+                <FormGroup>
+                  {topwebsites.map((website, index) => (
+                    <div key={index}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            name="websites"
+                            value={website._id}
+                            defaultChecked={website.checked ? true : false}
+                          />
+                        }
+                        label={website.url}
+                      />
+                      <Divider />
+                    </div>
+                  ))}
+                  <input
+                    name="contentEditor"
+                    value={contentEditor._id}
+                    type="hidden"
+                  />
+                </FormGroup>
+
+                <div className="mt-4">
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </TabPanel>
+          <TabPanel value="2">
+            <div id="terms" className="col s12">
+              <h6 className="text-xl font-semibold">
+                Headings From Competitors
+              </h6>
+              <ul className="divide-y divide-gray-200">
+                {websites.map((website) => {
+                  const array = JSON.parse(website.content);
+                  const heading1 = array[array.length - 1].heading1;
+                  const heading2 = array[array.length - 1].heading2;
+
+                  return (
+                    <>
+                      {heading1.map((head, index) => (
+                        <li key={`heading1_${index}`} className="py-2">
+                          {head}
+                        </li>
+                      ))}
+                      {heading2.map((head, index) => (
+                        <li key={`heading2_${index}`} className="py-2">
+                          {head}
+                        </li>
+                      ))}
+                    </>
+                  );
+                })}
+              </ul>
+            </div>
+          </TabPanel>
+        </TabContext>
+      </Box>
+    );
   };
 
   return (
@@ -44,18 +206,46 @@ const TextEditorLeftSide = ({ contentEditor }) => {
               <div className="col s12">
                 <div className="flex">
                   <h6 style={{ display: "inline" }}>{contentEditor.keyword}</h6>
-                  <SettingsIcon className="ml-auto cursor-pointer hover:text-blue-900" />
+                  <Tooltip
+                    title={<h1 className="text-base">Competitor Analysis</h1>}
+                    arrow
+                  >
+                    <SettingsIcon
+                      onClick={toggleDrawer(true)}
+                      className="ml-auto cursor-pointer hover:text-blue-900"
+                    />
+                  </Tooltip>
+                  <Drawer
+                    anchor="bottom"
+                    open={isBottom}
+                    onClose={toggleDrawer(false)}
+                    style={{ zIndex: "100000" }}
+                    PaperProps={{
+                      style: {
+                        height: "50%",
+                        marginTop: "auto",
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px",
+                      },
+                    }}
+                  >
+                    {list(contentEditor)}
+                  </Drawer>
                 </div>
                 <h6
+                  className="py-3"
                   style={{ textAlign: "center", textDecoration: "underline" }}
                 >
                   Content Score
                 </h6>
                 <LinearProgressWithLabel value={40} />
               </div>
-              <div className="col s12">
+              <div
+                className="col s12 mt-4"
+                style={{ borderTop: "1px solid #bebcbc" }}
+              >
                 <table className="w-full text-center">
-                  <caption class="caption-top py-3">
+                  <caption className="caption-top py-3">
                     <h6
                       style={{
                         textAlign: "center",
@@ -82,9 +272,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         words
                       </td>
-                      <td>4045</td>
-                      <td>1924</td>
-                      <td>2</td>
+                      <td>{structure.word.max}</td>
+                      <td>{structure.word.min}</td>
+                      <td>{count.wordCount}</td>
                     </tr>
                     <tr
                       id="h1"
@@ -93,9 +283,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h1
                       </td>
-                      <td>1</td>
-                      <td>1</td>
-                      <td>1</td>
+                      <td>{structure.h1.max}</td>
+                      <td>{structure.h1.min}</td>
+                      <td>{count.h1Count}</td>
                     </tr>
                     <tr
                       id="h2"
@@ -104,9 +294,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h2
                       </td>
-                      <td>20</td>
-                      <td>12</td>
-                      <td>0</td>
+                      <td>{structure.h2.max}</td>
+                      <td>{structure.h2.min}</td>
+                      <td>{count.h2Count}</td>
                     </tr>
                     <tr
                       id="h3"
@@ -115,9 +305,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h3
                       </td>
-                      <td>23</td>
-                      <td>16</td>
-                      <td>0</td>
+                      <td>{structure.h3.max}</td>
+                      <td>{structure.h3.min}</td>
+                      <td>{count.h3Count}</td>
                     </tr>
                     <tr
                       id="h4"
@@ -126,9 +316,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h4
                       </td>
-                      <td>8</td>
-                      <td>3</td>
-                      <td>0</td>
+                      <td>{structure.h4.max}</td>
+                      <td>{structure.h4.min}</td>
+                      <td>{count.h4Count}</td>
                     </tr>
                     <tr
                       id="h5"
@@ -137,9 +327,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h5
                       </td>
-                      <td>3</td>
-                      <td>0</td>
-                      <td>0</td>
+                      <td>{structure.h5.max}</td>
+                      <td>{structure.h5.min}</td>
+                      <td>{count.h5Count}</td>
                     </tr>
                     <tr
                       id="h6"
@@ -148,9 +338,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h6
                       </td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
+                      <td>{structure.h6.max}</td>
+                      <td>{structure.h6.min}</td>
+                      <td>{count.h6Count}</td>
                     </tr>
                     <tr
                       id="images"
@@ -159,9 +349,9 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         Images
                       </td>
-                      <td>42</td>
-                      <td>29</td>
-                      <td>0</td>
+                      <td>{structure.images.max}</td>
+                      <td>{structure.images.min}</td>
+                      <td>{count.imageCount}</td>
                     </tr>
                     <tr
                       id="paragraph"
@@ -170,17 +360,165 @@ const TextEditorLeftSide = ({ contentEditor }) => {
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         Paragraph
                       </td>
-                      <td>107</td>
-                      <td>67</td>
-                      <td>0</td>
+                      <td>{structure.paragraph.max}</td>
+                      <td>{structure.paragraph.min}</td>
+                      <td>{count.paragraphCount}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <div
+                className="col s12 mt-8"
+                style={{ borderTop: "1px solid #bebcbc" }}
+              >
+                <div className="row">
+                  <div className="col s12">
+                    <h6
+                      className="py-3"
+                      style={{
+                        textAlign: "center",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      Terms
+                    </h6>
+                  </div>
+                  <div className="col s12">
+                    {importantTopics.map((topic, index) => (
+                      <span
+                        key={index}
+                        style={{
+                          background: "lightblue",
+                          color: "#2196F3",
+                          padding: "3px 10px",
+                          borderRadius: "20px",
+                          margin: "3px",
+                          display: "inline-block",
+                        }}
+                      >
+                        #{topic}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="col s12">
+                    <h6
+                      className="py-3"
+                      style={{
+                        textAlign: "center",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      NLP Terms
+                    </h6>
+                  </div>
+                  <div className="col s12">
+                    <Box sx={{ width: "100%", typography: "body1" }}>
+                      <TabContext value={subValue}>
+                        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                          <TabList
+                            onChange={handleSubChange}
+                            aria-label="lab API tabs example"
+                          >
+                            <Tab label="NLP" value="1" />
+                            <Tab label="HEADING" value="2" />
+                            <Tab
+                              label={
+                                <div className="flex">
+                                  <Tooltip
+                                    title={
+                                      <h1 className="text-base">
+                                        These terms are not used by your
+                                        competitors; you are free to use them.
+                                      </h1>
+                                    }
+                                    arrow
+                                  >
+                                    <span>MISSING</span>
+                                    <span className="bg-red text-white px-1 ml-2">
+                                      BETA
+                                    </span>
+                                  </Tooltip>
+                                </div>
+                              }
+                              value="3"
+                            />
+                          </TabList>
+                        </Box>
+                        <TabPanel value="1">
+                          <div id="all" className="col s12">
+                            {nlp_tokens.map((nlpToken, index) => (
+                              <ExamplePopupModal
+                                name={nlpToken.name}
+                                min={nlpToken.min}
+                                max={nlpToken.max}
+                                examples={nlpToken.examples}
+                                key={index}
+                              />
+                            ))}
+                          </div>
+                        </TabPanel>
+                        <TabPanel value="2">
+                          <div id="headings" className="col s12">
+                            {nlp_tokens.map(
+                              (nlpToken, index) =>
+                                (nlpToken.heading || index === 0) && (
+                                  <ExamplePopupModal
+                                    name={nlpToken.name}
+                                    examples={nlpToken.examples}
+                                    key={index}
+                                  />
+                                )
+                            )}
+                          </div>
+                        </TabPanel>
+                        <TabPanel value="3">
+                          <table className="w-full text-center">
+                            <thead>
+                              <tr className=" border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th className="pb-2">Term</th>
+                                <th>volume</th>
+                                <th>CPC</th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                        </TabPanel>
+                      </TabContext>
+                    </Box>
+                  </div>
+                </div>
+              </div>
             </div>
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="2">
+            <div className="col s12 py-3">
+              <h6>Generated Outline</h6>
+            </div>
+            <Accordion style={{ backgroundColor: "transparent" }}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+              >
+                Outline
+              </AccordionSummary>
+              <AccordionDetails>{outline}</AccordionDetails>
+            </Accordion>
+          </TabPanel>
+          <TabPanel value="3">
+            <div className="col-span-12">
+              <h6 className="text-center underline">Competitors</h6>
+              <ul className="divide-y divide-gray-200 border-none">
+                {websites.map((website, index) => (
+                  <li key={index} className="py-2">
+                    <a href={website.url} className="block">
+                      {website.url}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </TabPanel>
         </TabContext>
       </Box>
     </div>

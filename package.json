@@ -30,6 +30,7 @@
     "react-quill": "^2.0.0",
     "react-redux": "^9.1.0",
     "react-select": "^5.8.0",
+    "react-spring": "^9.7.3",
     "react-toastify": "^10.0.5",
     "svix": "^1.21.0"
   },

@@ -1,4 +1,4 @@
-import { refreshDatabase } from "@/lib/actions/seeder.action";
+import { refreshDatabase } from "@/lib/actions/dbRefresh.action";
 
 const page = async () => {
   await refreshDatabase();

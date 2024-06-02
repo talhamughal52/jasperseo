@@ -16,7 +16,7 @@ const ContentEditorForm = () => {
       await createEditor(event);
       toast.success("keyword is in queue. It can take upto 5min");
       router.push("/editor");
-    }, 1000);
+    }, 500);
   };
 
   useEffect(() => {

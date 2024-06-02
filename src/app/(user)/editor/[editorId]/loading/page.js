@@ -1,13 +1,13 @@
 import { Suspense } from "react";
-import ContentEditorMainWrapper from "@/components/ContentEditorMainWrapper";
 import ContentEditorLoader from "@/components/ContentEditorLoader";
+import ContentEditorLoaderWrapper from "@/components/ContentEditorLoaderWrapper";
 
 const page = async ({ params }) => {
   const editorId = params.editorId;
   return (
     <div className="flex justify-between">
       <Suspense fallback={<ContentEditorLoader />}>
-        <ContentEditorMainWrapper editorId={editorId} />
+        <ContentEditorLoaderWrapper editorId={editorId} />
       </Suspense>
     </div>
   );

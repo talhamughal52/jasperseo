@@ -23,7 +23,7 @@ const ContentEditorSchema = new Schema(
       default: null,
     },
     saved: {
-      type: Boolean,
+      type: String,
       default: null,
     },
     user: {
