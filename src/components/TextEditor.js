@@ -5,7 +5,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const TextEditor = ({ contentEditor, setCount, tokens }) => {
-  const [content, setContent] = useState(contentEditor.saved);
+  // const [content, setContent] = useState(contentEditor.saved);
+  const [content, setContent] = useState("");
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -71,6 +72,12 @@ const TextEditor = ({ contentEditor, setCount, tokens }) => {
     };
     setCount(count);
   };
+
+  useEffect(() => {
+    let editorContent = contentEditor.saved ? contentEditor.saved : "";
+    tagsAnalysis(editorContent);
+    setContent(editorContent);
+  }, []);
 
   let timer = null;
   const handleChange = (value) => {
