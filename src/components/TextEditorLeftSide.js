@@ -1,40 +1,24 @@
 "use client";
-import TextEditor from "@/components/TextEditor";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import LinearProgress from "@mui/material/LinearProgress";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Tooltip from "@mui/material/Tooltip";
-
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
-
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
 import ExamplePopupModal from "./ExamplePopupModal";
 import { handlecompatitorsChange } from "@/lib/actions/editor.actions";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 const TextEditorLeftSide = ({
   contentEditor,

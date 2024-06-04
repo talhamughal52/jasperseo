@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import AuthSideBar from "@/components/AuthSideBar";
 import AuthHeader from "@/components/AuthHeader";
 

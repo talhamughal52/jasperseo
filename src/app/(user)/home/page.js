@@ -1,5 +1,3 @@
-import Link from "next/link";
-import React from "react";
 import { currentUser } from "@clerk/nextjs";
 
 export default async function page() {
