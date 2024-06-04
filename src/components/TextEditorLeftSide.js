@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -29,6 +29,7 @@ const TextEditorLeftSide = ({
   websites,
   topwebsites,
   count,
+  percentage,
 }) => {
   const [value, setValue] = useState("1");
   const [subValue, setSubValue] = useState("1");
@@ -222,7 +223,7 @@ const TextEditorLeftSide = ({
                 >
                   Content Score
                 </h6>
-                <LinearProgressWithLabel value={40} />
+                <LinearProgressWithLabel value={percentage} />
               </div>
               <div
                 className="col s12 mt-4"
@@ -403,28 +404,15 @@ const TextEditorLeftSide = ({
                             onChange={handleSubChange}
                             aria-label="lab API tabs example"
                           >
-                            <Tab label="NLP" value="1" />
-                            <Tab label="HEADING" value="2" />
                             <Tab
-                              label={
-                                <div className="flex">
-                                  <Tooltip
-                                    title={
-                                      <h1 className="text-base">
-                                        These terms are not used by your
-                                        competitors; you are free to use them.
-                                      </h1>
-                                    }
-                                    arrow
-                                  >
-                                    <span>MISSING</span>
-                                    <span className="bg-red text-white px-1 ml-2">
-                                      BETA
-                                    </span>
-                                  </Tooltip>
-                                </div>
-                              }
-                              value="3"
+                              label="NLP"
+                              value="1"
+                              style={{ margin: "auto" }}
+                            />
+                            <Tab
+                              label="HEADING"
+                              value="2"
+                              style={{ margin: "auto" }}
                             />
                           </TabList>
                         </Box>
@@ -435,6 +423,7 @@ const TextEditorLeftSide = ({
                                 name={nlpToken.name}
                                 min={nlpToken.min}
                                 max={nlpToken.max}
+                                current={nlpToken.current}
                                 examples={nlpToken.examples}
                                 key={index}
                               />
@@ -450,22 +439,11 @@ const TextEditorLeftSide = ({
                                     name={nlpToken.name}
                                     examples={nlpToken.examples}
                                     key={index}
+                                    current={nlpToken.current}
                                   />
                                 )
                             )}
                           </div>
-                        </TabPanel>
-                        <TabPanel value="3">
-                          <table className="w-full text-center">
-                            <thead>
-                              <tr className=" border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th className="pb-2">Term</th>
-                                <th>volume</th>
-                                <th>CPC</th>
-                              </tr>
-                            </thead>
-                            <tbody></tbody>
-                          </table>
                         </TabPanel>
                       </TabContext>
                     </Box>

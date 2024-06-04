@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Tooltip from "@mui/material/Tooltip";
 
-const ExamplePopupModal = ({ name, min, max, examples }) => {
+const ExamplePopupModal = ({ name, min, max, current, examples }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,8 +40,12 @@ const ExamplePopupModal = ({ name, min, max, examples }) => {
                 borderTopLeftRadius: "10px",
                 borderBottomLeftRadius: "10px",
                 padding: "5px",
-                backgroundColor: "#fff5f5",
-                color: "#822727",
+                backgroundColor: `${
+                  current >= min || current > 0 ? "#c6f6d5" : "#fff5f5"
+                }`,
+                color: `${
+                  current >= min || current > 0 ? "#22543d" : "#822727"
+                }`,
               }}
             >
               {name}
@@ -55,7 +59,7 @@ const ExamplePopupModal = ({ name, min, max, examples }) => {
               borderBottomRightRadius: "5px",
             }}
           >
-            {min && max ? `0/${min} - ${max}` : 0}
+            {min && max ? `${current}/${min} - ${max}` : current}
           </span>
         </div>
       </Tooltip>

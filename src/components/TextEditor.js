@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const TextEditor = ({ contentEditor, setCount, tokens }) => {
+const TextEditor = ({
+  contentEditor,
+  setCount,
+  tokens,
+  setTokens,
+  structure,
+  setPercentage,
+}) => {
   // const [content, setContent] = useState(contentEditor.saved);
   const [content, setContent] = useState("");
   const modules = {
@@ -71,6 +78,71 @@ const TextEditor = ({ contentEditor, setCount, tokens }) => {
       paragraphCount,
     };
     setCount(count);
+    let total_completed = 0;
+    for (let i = 0; i < tokens.length; i++) {
+      let keyword = tokens[i].name;
+      let tokenRegex = new RegExp(keyword, "gi");
+      let tokenMatches = editorContent.match(tokenRegex);
+      if (tokenMatches) {
+        updateTokens((prevTokens) => {
+          const updatedTokens = [...prevTokens];
+          updatedTokens[i] = {
+            ...updatedTokens[i],
+            current: tokenMatches.length,
+          };
+          return updatedTokens;
+        });
+        total_completed++;
+      } else {
+        updateTokens((prevTokens) => {
+          const updatedTokens = [...prevTokens];
+          updatedTokens[i] = { ...updatedTokens[i], current: 0 };
+          return updatedTokens;
+        });
+      }
+    }
+    total_completed = Math.floor((total_completed / tokens.length) * 33);
+    let headingsScore = 0;
+    let lines = editorContent.split("\n");
+    let firstLine = lines[0];
+    let tempElement = document.createElement("div");
+    tempElement.innerHTML = firstLine;
+    let isFirstLineH1 =
+      tempElement.firstChild &&
+      tempElement.firstChild.nodeName.toLowerCase() === "h1";
+    let containsKeyword = firstLine.includes(contentEditor.keyword);
+    if (isFirstLineH1 && containsKeyword) {
+      headingsScore += 20;
+    } else if (isFirstLineH1) {
+      headingsScore += 5;
+    }
+    if (h2Count >= structure.h2.min) {
+      headingsScore += 2;
+    }
+    if (h3Count >= structure.h3.min) {
+      headingsScore += 2;
+    }
+    if (h4Count >= structure.h4.min) {
+      headingsScore += 2;
+    }
+    if (h5Count >= structure.h5.min) {
+      headingsScore += 2;
+    }
+    if (h6Count >= structure.h6.min) {
+      headingsScore += 2;
+    }
+    let wordsScore = 0;
+    if (wordCount >= structure.word.min) {
+      wordsScore += 11;
+    }
+    if (imageCount >= structure.images.min) {
+      wordsScore += 11;
+    }
+    if (paragraphCount >= structure.paragraph.min) {
+      wordsScore += 11;
+    }
+    let total = wordsScore + headingsScore + total_completed;
+    setPercentage(total);
   };
 
   useEffect(() => {
@@ -88,6 +160,10 @@ const TextEditor = ({ contentEditor, setCount, tokens }) => {
     timer = setTimeout(() => {
       saveEditorContent(contentEditor._id, value);
     }, 3000);
+  };
+
+  const updateTokens = (updater) => {
+    setTokens((prevTokens) => updater(prevTokens));
   };
 
   return (

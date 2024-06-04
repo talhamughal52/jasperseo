@@ -15,22 +15,30 @@ const ContentEditorWrapper = ({ response }) => {
     wordCount: 0,
     paragraphCount: 0,
   });
+
+  const [tokens, setTokens] = useState(response.nlp_tokens);
+  const [percentage, setPercentage] = useState(0);
+
   return (
     <>
       <TextEditor
         contentEditor={response.contentEditor}
         setCount={setCount}
-        tokens={response.nlp_tokens}
+        tokens={tokens}
+        setTokens={setTokens}
+        structure={response.structure}
+        setPercentage={setPercentage}
       />
       <TextEditorLeftSide
         contentEditor={response.contentEditor}
         structure={response.structure}
         importantTopics={response.importantTopics}
-        nlp_tokens={response.nlp_tokens}
+        nlp_tokens={tokens}
         outline={response.outline}
         websites={response.websites}
         topwebsites={response.topwebsites}
         count={count}
+        percentage={percentage}
       />
     </>
   );
