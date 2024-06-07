@@ -6,12 +6,13 @@ import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import { auth } from "@clerk/nextjs";
+import initStripe from "stripe";
 
 // CREATE
 export async function createUser(user) {
   try {
     await connectToDatabase();
-    
+
     const newUser = await User.create(user);
 
     return JSON.parse(JSON.stringify(newUser));
@@ -45,6 +46,36 @@ export async function updateUser(clerkId, user) {
     });
 
     if (!updatedUser) throw new Error("User update failed");
+
+    return JSON.parse(JSON.stringify(updatedUser));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// Create stripe ID
+export async function createStripeCustomer(id, email) {
+  try {
+    const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+    console.log(email);
+    const customer = await stripe.customers.create({
+      email: email,
+    });
+    console.log(customer);
+
+    await connectToDatabase();
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: id },
+      {
+        stripe_id: customer.id,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!updatedUser) throw new Error("User not found");
 
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
