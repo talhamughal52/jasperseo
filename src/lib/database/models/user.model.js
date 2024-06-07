@@ -1,4 +1,5 @@
 import { Schema, model, models } from "mongoose";
+import initStripe from "stripe";
 
 const UserSchema = new Schema(
   {
@@ -30,6 +31,10 @@ const UserSchema = new Schema(
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    stripe_id: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true },

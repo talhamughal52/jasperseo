@@ -6,11 +6,19 @@ import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import { auth } from "@clerk/nextjs";
+import initStripe from "stripe";
 
 // CREATE
 export async function createUser(user) {
   try {
     await connectToDatabase();
+
+    const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+    console.log(user.email);
+    const customer = await stripe.customers.create({
+      email: user.email,
+    });
+    user.stripe_id = customer.id;
 
     const newUser = await User.create(user);
 
