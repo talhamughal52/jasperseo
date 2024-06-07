@@ -15,7 +15,11 @@ export async function charge() {
     }
     console.log(user);
     if (!user.stripe_id) {
-      const updatedUser = await createStripeCustomer(user._id, user.email);
+      const updatedUser = await createStripeCustomer(
+        user._id,
+        user.username,
+        user.email
+      );
       console.log(updatedUser);
     } else {
       console.log("stripe_id exist");

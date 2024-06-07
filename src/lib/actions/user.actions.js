@@ -54,11 +54,12 @@ export async function updateUser(clerkId, user) {
 }
 
 // Create stripe ID
-export async function createStripeCustomer(id, email) {
+export async function createStripeCustomer(id, username, email) {
   try {
     const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
     console.log(email);
     const customer = await stripe.customers.create({
+      name: username,
       email: email,
     });
     console.log(customer);
