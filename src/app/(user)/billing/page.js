@@ -1,4 +1,10 @@
+"use client";
+import { charge } from "@/lib/actions/billing.action";
+
 const page = () => {
+  const chargeBill = async () => {
+    await charge();
+  };
   return (
     <>
       <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
@@ -113,12 +119,12 @@ const page = () => {
               <span>Competitors Missing Terms</span>
             </li>
           </ul>
-          <a
-            href="#"
+          <button
+            onClick={chargeBill}
             class="text-white bg-Bprimary-600 hover:bg-Bprimary-700 focus:ring-4 focus:ring-Bprimary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-Bprimary-900"
           >
             Activate
-          </a>
+          </button>
         </div>
 
         <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -223,12 +229,12 @@ const page = () => {
               <span>Competitors Missing Terms</span>
             </li>
           </ul>
-          <a
-            href="#"
+          <button
+            onClick={chargeBill}
             class="text-white bg-Bprimary-600 hover:bg-Bprimary-700 focus:ring-4 focus:ring-Bprimary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-Bprimary-900"
           >
             Activate
-          </a>
+          </button>
         </div>
 
         <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -333,12 +339,12 @@ const page = () => {
               <span>Competitors Missing Terms</span>
             </li>
           </ul>
-          <a
-            href="#"
+          <button
+            onClick={chargeBill}
             class="text-white bg-Bprimary-600 hover:bg-Bprimary-700 focus:ring-4 focus:ring-Bprimary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-Bprimary-900"
           >
             Activate
-          </a>
+          </button>
         </div>
       </div>
       <div class="relative w-full px-6 pt-10 pb-8 mt-8 shadow-xl sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
