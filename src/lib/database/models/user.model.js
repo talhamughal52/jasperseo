@@ -1,5 +1,4 @@
 import { Schema, model, models } from "mongoose";
-import initStripe from "stripe";
 
 const UserSchema = new Schema(
   {
