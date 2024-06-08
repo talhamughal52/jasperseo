@@ -30,7 +30,7 @@ export async function POST(request) {
       totalEditors: editors,
       activationDate: Date.now(),
     };
-    console.log(billingDetial);
+    console.log(updateedBillingDetial);
 
     const billingDetial = await updateUserBillingDetial(
       user,
