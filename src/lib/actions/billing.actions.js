@@ -64,6 +64,8 @@ export async function charge(planName) {
       throw new Error(`Could not create checkout session`);
     }
     revalidatePath("/invoices");
+    revalidatePath("/home");
+    revalidatePath("/billing");
     return JSON.parse(JSON.stringify({ session: checkoutSession }));
   } catch (error) {
     handleError(error);
@@ -151,6 +153,40 @@ export async function updateUserBillingDetial(user, updateedBillingDetial) {
 
     revalidatePath("/billing");
     return JSON.parse(JSON.stringify(billingDetial));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function getUserTotalPayment() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    if (!user.stripe_id) {
+      user = await createStripeCustomer(user._id, user.username, user.email);
+    }
+
+    const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+
+    const { data } = await stripe.invoices.list();
+    let totalPayment = [];
+    data.map((invoice) => {
+      if (invoice.customer === user.stripe_id) {
+        totalPayment.push(parseInt(invoice.total));
+      }
+    });
+    let sum = totalPayment.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    sum = sum / 100;
+    revalidatePath("/invoices");
+    return JSON.parse(JSON.stringify(sum));
   } catch (error) {
     handleError(error);
   }

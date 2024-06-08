@@ -391,7 +391,7 @@ const PackagesWrapper = ({ billingDetail }) => {
                     </svg>
                   </span>
                 </summary>
-                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
+                <p className="group-open:animate-fadeIn mt-3 text-neutral-600 dark:text-white">
                   To purchase a package, Click on any package and enter your
                   payment details. That's it.
                 </p>
@@ -417,7 +417,7 @@ const PackagesWrapper = ({ billingDetail }) => {
                     </svg>
                   </span>
                 </summary>
-                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
+                <p className="group-open:animate-fadeIn mt-3 text-neutral-600 dark:text-white">
                   Yes, you can upgrade your package at any time. Contact us in
                   chat for upgrading it
                 </p>
@@ -443,7 +443,7 @@ const PackagesWrapper = ({ billingDetail }) => {
                     </svg>
                   </span>
                 </summary>
-                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
+                <p className="group-open:animate-fadeIn mt-3 text-neutral-600 dark:text-white">
                   We accept various payment methods, including credit cards, and
                   bank transfers. Contact us if you have any other method.
                 </p>
@@ -469,7 +469,7 @@ const PackagesWrapper = ({ billingDetail }) => {
                     </svg>
                   </span>
                 </summary>
-                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
+                <p className="group-open:animate-fadeIn mt-3 text-neutral-600 dark:text-white">
                   Yes, You can refund within 3 days of purchase. Contact us in
                   live support for refunding.
                 </p>

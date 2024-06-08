@@ -49,3 +49,21 @@
 .cl-userButtonPopoverFooter {
   display: none !important;
 }
+
+/* [data-column-id="Keyword"].rdt_TableCol {
+  background-color: transparent !important;
+} */
+
+.rdt_TableHeader {
+  background-color: transparent !important;
+}
+
+.ContentEditorDataTableWrapper > header,
+.ContentEditorDataTableWrapper .rdt_Table,
+.ContentEditorDataTableWrapper .rdt_Pagination,
+.ContentEditorDataTableWrapper .rdt_Table > div,
+.ContentEditorDataTableWrapper .rdt_Table .rdt_TableHeadRow,
+.ContentEditorDataTableWrapper .rdt_Table .rdt_TableRow {
+  background-color: transparent !important;
+  @apply dark:text-white;
+}

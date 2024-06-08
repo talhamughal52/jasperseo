@@ -42,7 +42,17 @@ const ContentEditorDataTable = ({ contentEditors }) => {
   }, [search]);
   return (
     <DataTable
-      title="Keywords"
+      // title="Keywords"
+      title={
+        <span className="text-title-md2  text-black dark:text-white py-4">
+          Keywords
+        </span>
+      }
+      noDataComponent={
+        <div style={{ padding: "24px" }} className="text-black dark:text-white">
+          There are no records to display
+        </div>
+      }
       columns={columns}
       data={filteredContentEditors}
       pagination
