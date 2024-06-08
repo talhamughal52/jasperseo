@@ -48,7 +48,7 @@ const page = async () => {
           <div className="mb-8">
             <div className="text-gray-900 font-bold text-xl mb-2">Renewal</div>
             <p className="text-gray-700 text-base text-right pr-10">
-              Your current plan expire on{" "}
+              Your current plan activation date{" "}
               <span className="font-bold">{date}</span>
             </p>
           </div>
