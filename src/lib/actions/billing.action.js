@@ -45,7 +45,9 @@ export async function charge(planName) {
       cancel_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/cancel`,
       subscription_data: {
         metadata: {
-          payingUserId: user.id,
+          payingUserId: user._id,
+          plan: planName,
+          buyerId: user._id,
         },
       },
     });
