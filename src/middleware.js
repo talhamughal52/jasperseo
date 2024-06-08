@@ -7,7 +7,8 @@ export default authMiddleware({
     "/contact",
     "/payment/success",
     "/payment/cancel",
-    "/api/webhooks/clerk, '/api/webhooks/stripe'",
+    "/api/webhooks/clerk",
+    "/api/webhooks/stripe",
   ],
 });
 export const config = {
