@@ -16,7 +16,7 @@ const BillingSchema = new Schema(
     },
     activationDate: {
       type: Date,
-      default: null,
+      default: Date.now,
     },
     renewal: {
       type: Boolean,
