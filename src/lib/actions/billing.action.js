@@ -118,21 +118,24 @@ export async function getUserBillingDetial() {
 export async function updateUserBillingDetial(user, updateedBillingDetial) {
   try {
     await connectToDatabase();
-    let billingDetial = await Billing.findOneAndUpdate(
-      {
-        user: user,
-      },
-      {
-        updateedBillingDetial,
-      },
-      {
-        new: true,
-      }
-    );
+    console.log(updateedBillingDetial);
+    console.log(user);
+    let billingDetial = await Billing.findOne({
+      user: user,
+    });
 
     if (!billingDetial) {
       throw new Error("User Billing Detial not found");
     }
+
+    billingDetial.planName = updateedBillingDetial.planName;
+    billingDetial.totalEditors = updateedBillingDetial.totalEditors;
+    billingDetial.activationDate = updateedBillingDetial.activationDate;
+    await billingDetial.save();
+
+    billingDetial = await Billing.findOne({
+      user: user,
+    });
 
     // billingDetial.activationDate = Date.now();
     // billingDetial.totalEditors = 6;
