@@ -871,7 +871,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       />
                     </svg> */}
                     <CreditCardOutlinedIcon />
-                    Billing
+                    Billing Details
                   </Link>
                 </li>
                 <li>
