@@ -22,29 +22,26 @@ export async function POST(request) {
   // CREATE
   if (eventType === "checkout.session.completed") {
     const { id, amount_total, metadata, customer } = event.data.object;
-
+    const { planName, user, editors } = metadata;
     console.log(event.data.object);
 
-    const transaction = {
-      stripeId: id,
-      amount: amount_total ? amount_total / 100 : 0,
-      plan: metadata?.plan || "",
-      credits: Number(metadata?.credits) || 0,
-      buyerId: metadata?.buyerId || "",
-      createdAt: new Date(),
+    const billingDetial = {
+      planName: planName,
+      totalEditors: editors,
+      activationDate: Date.now(),
     };
+    console.log(billingDetial);
 
-    console.log(event.data.object);
-    console.log(transaction);
-    console.log(customer);
-
-    // const billingDetial = await updateUserBillingDetial(customer);
+    const updateedBillingDetial = await updateUserBillingDetial(
+      user,
+      billingDetial
+    );
     // const newTransaction = await createTransaction(transaction);
 
     // return NextResponse.json({ message: "OK", transaction: newTransaction });
     return NextResponse.json({
       message: "OK",
-      transaction,
+      updateedBillingDetial,
     });
   }
 

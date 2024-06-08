@@ -25,12 +25,16 @@ export async function charge(planName) {
     }
 
     let priceId = null;
+    let editors = null;
 
     if (planName === "starter") {
       priceId = "price_1PPB9sGJ0qDgL9Yh9tt2IrZt";
+      editors = 6;
     } else if (planName === "pro") {
       priceId = "price_1PPBFQGJ0qDgL9YhZzf8LT5G";
+      editors = 15;
     } else if ("premium") {
+      editors = 60;
       priceId = "price_1PPJoQGJ0qDgL9YhFO3qxe2e";
     }
     const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
@@ -48,8 +52,9 @@ export async function charge(planName) {
       success_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/success`,
       cancel_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/cancel`,
       metadata: {
-        payingUserId: user._id,
-        plan: planName,
+        user: user._id,
+        planName: planName,
+        editors: editors,
       },
     });
 
@@ -110,29 +115,32 @@ export async function getUserBillingDetial() {
   }
 }
 
-export async function updateUserBillingDetial(stripe_id) {
+export async function updateUserBillingDetial(user) {
   try {
-    const { userId } = auth();
     await connectToDatabase();
-    let user = await getUserByStripeId(stripe_id);
-    if (!user) {
-      throw new Error("User not found");
-    }
-    let billingDetial = await Billing.findOne({
-      user: user._id,
-    });
+    let billingDetial = await Billing.findOneAndUpdate(
+      {
+        user: user,
+      },
+      {
+        billingDetial,
+      },
+      {
+        new: true,
+      }
+    );
 
     if (!billingDetial) {
       throw new Error("User Billing Detial not found");
     }
 
-    billingDetial.activationDate = Date.now();
-    billingDetial.totalEditors = 6;
-    await billingDetial.save();
+    // billingDetial.activationDate = Date.now();
+    // billingDetial.totalEditors = 6;
+    // await billingDetial.save();
 
-    billingDetial = await Billing.findOne({
-      user: user._id,
-    });
+    // billingDetial = await Billing.findOne({
+    //   user: user._id,
+    // });
 
     revalidatePath("/billing");
     return JSON.parse(JSON.stringify(billingDetial));
