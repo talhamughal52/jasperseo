@@ -49,8 +49,10 @@ export async function charge(planName) {
           quantity: 1,
         },
       ],
-      success_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/success`,
-      cancel_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/cancel`,
+      success_url:
+        process.env.NEXT_PUBLIC_WEBSITE_URL + `/billing?success=true`,
+      cancel_url:
+        process.env.NEXT_PUBLIC_WEBSITE_URL + `/billing?canceled=true`,
       metadata: {
         user: user._id,
         planName: planName,
@@ -118,8 +120,6 @@ export async function getUserBillingDetial() {
 export async function updateUserBillingDetial(user, updateedBillingDetial) {
   try {
     await connectToDatabase();
-    console.log(updateedBillingDetial);
-    console.log(user);
     let billingDetial = await Billing.findOne({
       user: user,
     });
@@ -127,25 +127,27 @@ export async function updateUserBillingDetial(user, updateedBillingDetial) {
     if (!billingDetial) {
       throw new Error("User Billing Detial not found");
     }
+    if (updateedBillingDetial.planName) {
+      billingDetial.planName = updateedBillingDetial.planName;
+    }
 
-    billingDetial.planName = updateedBillingDetial.planName;
-    billingDetial.totalEditors =
-      parseInt(updateedBillingDetial.totalEditors) +
-      parseInt(billingDetial.totalEditors);
-    billingDetial.activationDate = updateedBillingDetial.activationDate;
+    if (updateedBillingDetial.totalEditors) {
+      billingDetial.totalEditors =
+        parseInt(updateedBillingDetial.totalEditors) +
+        parseInt(billingDetial.totalEditors);
+    }
+
+    if (updateedBillingDetial.usedEditors) {
+      billingDetial.usedEditors = parseInt(billingDetial.usedEditors) + 1;
+      billingDetial.totalEditors = parseInt(billingDetial.totalEditors) - 1;
+    }
+
+    billingDetial.activationDate = Date.now();
     await billingDetial.save();
 
     billingDetial = await Billing.findOne({
       user: user,
     });
-
-    // billingDetial.activationDate = Date.now();
-    // billingDetial.totalEditors = 6;
-    // await billingDetial.save();
-
-    // billingDetial = await Billing.findOne({
-    //   user: user._id,
-    // });
 
     revalidatePath("/billing");
     return JSON.parse(JSON.stringify(billingDetial));

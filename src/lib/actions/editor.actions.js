@@ -8,6 +8,7 @@ import { getUserById } from "./user.actions";
 import { useRouter, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createTopWebsite } from "./topWebsite.actions";
+import { updateUserBillingDetial } from "./billing.actions";
 
 export async function createEditor(contentEdiorFormData) {
   try {
@@ -30,6 +31,10 @@ export async function createEditor(contentEdiorFormData) {
     if (!newContentEditor) {
       throw new Error("Content Editor Not Created !");
     }
+    const updateedBillingDetial = {
+      usedEditors: 1,
+    };
+    await updateUserBillingDetial(user._id, updateedBillingDetial);
     await setupInitialEditor(newContentEditor);
     revalidatePath("/editor");
   } catch (error) {

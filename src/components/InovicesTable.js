@@ -1,4 +1,4 @@
-import { customerInvoices } from "@/lib/actions/billing.action";
+import { customerInvoices } from "@/lib/actions/billing.actions";
 
 import Skeleton from "@mui/material/Skeleton";
 

@@ -1,4 +1,4 @@
-import { updateUserBillingDetial } from "@/lib/actions/billing.action";
+import { updateUserBillingDetial } from "@/lib/actions/billing.actions";
 import { NextResponse } from "next/server";
 import stripe from "stripe";
 
@@ -21,24 +21,18 @@ export async function POST(request) {
 
   // CREATE
   if (eventType === "checkout.session.completed") {
-    const { id, amount_total, metadata, customer } = event.data.object;
+    const { metadata } = event.data.object;
     const { planName, user, editors } = metadata;
-    console.log(event.data.object);
 
     const updateedBillingDetial = {
       planName: planName,
       totalEditors: editors,
-      activationDate: Date.now(),
     };
-    console.log(updateedBillingDetial);
 
     const billingDetial = await updateUserBillingDetial(
       user,
       updateedBillingDetial
     );
-    // const newTransaction = await createTransaction(transaction);
-
-    // return NextResponse.json({ message: "OK", transaction: newTransaction });
     return NextResponse.json({
       message: "OK",
       billingDetial,

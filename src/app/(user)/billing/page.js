@@ -1,13 +1,14 @@
+import BillingWrapper from "@/components/BillingWrapper";
 import RenewalSwitch from "@/components/RenewalSwitch";
-import { getUserBillingDetial } from "@/lib/actions/billing.action";
+import { getUserBillingDetial } from "@/lib/actions/billing.actions";
+import { toast } from "react-toastify";
 
-const page = async () => {
+const page = async ({ searchParams }) => {
   const billingDetail = await getUserBillingDetial();
-  console.log(billingDetail);
   let date = new Date(billingDetail.activationDate);
   date = date.toISOString().split("T")[0];
   return (
-    <div>
+    <BillingWrapper>
       <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center">
         <div className="w-full border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">
@@ -66,7 +67,7 @@ const page = async () => {
           </div>
         </div>
       </div>
-    </div>
+    </BillingWrapper>
   );
 };
 

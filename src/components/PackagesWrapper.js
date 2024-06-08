@@ -1,5 +1,5 @@
 "use client";
-import { charge } from "@/lib/actions/billing.action";
+import { charge } from "@/lib/actions/billing.actions";
 import { loadStripe } from "@stripe/stripe-js";
 
 const PackagesWrapper = ({ billingDetail }) => {
