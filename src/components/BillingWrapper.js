@@ -9,7 +9,11 @@ const BillingWrapper = ({ children }) => {
     if (query.get("success")) {
       toast.success("Subscription Activated Successfully");
     } else if (query.get("canceled")) {
-      toast.success("Subscription Canceled Successfully");
+      toast.error("Subscription Canceled Successfully");
+    } else if (query.get("nobalance")) {
+      toast.error(
+        "You have no any available Content Editor ! Please Subscribe first"
+      );
     }
   }, []);
   return children;

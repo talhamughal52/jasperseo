@@ -4,8 +4,7 @@ import { connectToDatabase } from "../database/mongoose";
 import ContentEditor from "@/lib/database/models/contentEditor.model";
 import TopWebsite from "@/lib/database/models/topWebsite.model";
 import { auth } from "@clerk/nextjs";
-import { getUserById } from "./user.actions";
-import { useRouter, redirect } from "next/navigation";
+import { checkUserBalance, getUserById } from "./user.actions";
 import { revalidatePath } from "next/cache";
 import { createTopWebsite } from "./topWebsite.actions";
 import { updateUserBillingDetial } from "./billing.actions";
@@ -17,6 +16,10 @@ export async function createEditor(contentEdiorFormData) {
     const user = await getUserById(userId);
     if (!user) {
       throw new Error("User not found");
+    }
+    const userBalance = await checkUserBalance(user._id);
+    if (!userBalance.totalEditors) {
+      return JSON.parse(JSON.stringify(false));
     }
     const contentEditorFormRawData = {
       keyword: contentEdiorFormData.get("keyword"),
@@ -37,6 +40,7 @@ export async function createEditor(contentEdiorFormData) {
     await updateUserBillingDetial(user._id, updateedBillingDetial);
     await setupInitialEditor(newContentEditor);
     revalidatePath("/editor");
+    return JSON.parse(JSON.stringify(true));
   } catch (error) {
     handleError(error);
   }

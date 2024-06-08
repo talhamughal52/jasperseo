@@ -126,8 +126,9 @@ export async function deleteUser(clerkId) {
     const userEditors = await ContentEditor.find({ user: userToDelete._id });
     for (const editor of userEditors) {
       console.log(editor._id);
-      await TopWebsite.findOneAndDelete({ contentEdior: editor._id });
+      await TopWebsite.deleteMany({ contentEdior: editor._id });
     }
+    await ContentEditor.deleteMany({ user: userToDelete._id });
     revalidatePath("/");
 
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
@@ -163,6 +164,18 @@ export async function getUsers() {
     // if (!users) throw new Error("Users not found");
 
     return JSON.parse(JSON.stringify(users));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function checkUserBalance(userId) {
+  try {
+    await connectToDatabase();
+
+    const userBill = await Billing.find({ user: userId });
+
+    return JSON.parse(JSON.stringify(userBill));
   } catch (error) {
     handleError(error);
   }
