@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs";
 import { createStripeCustomer, getUserById } from "./user.actions";
 import { revalidatePath } from "next/cache";
 import initStripe from "stripe";
+import Billing from "../database/models/billing.model";
 
 export async function charge(planName) {
   try {
@@ -83,6 +84,24 @@ export async function customerInvoices() {
     });
     revalidatePath("/invoices");
     return JSON.parse(JSON.stringify(invoices));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function getUserBillingDetial() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const billingDetial = await Billing.findOne({
+      user: user._id,
+    });
+    revalidatePath("/billing");
+    return JSON.parse(JSON.stringify(billingDetial));
   } catch (error) {
     handleError(error);
   }
