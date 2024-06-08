@@ -38,7 +38,6 @@ export async function POST(request) {
     // return NextResponse.json({ message: "OK", transaction: newTransaction });
     return NextResponse.json({
       message: "OK",
-      event: event,
       transaction: transaction,
     });
   }
