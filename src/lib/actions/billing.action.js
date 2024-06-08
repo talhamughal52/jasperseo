@@ -129,7 +129,8 @@ export async function updateUserBillingDetial(user, updateedBillingDetial) {
     }
 
     billingDetial.planName = updateedBillingDetial.planName;
-    billingDetial.totalEditors = updateedBillingDetial.totalEditors;
+    billingDetial.totalEditors =
+      updateedBillingDetial.totalEditors + billingDetial.totalEditors;
     billingDetial.activationDate = updateedBillingDetial.activationDate;
     await billingDetial.save();
 
