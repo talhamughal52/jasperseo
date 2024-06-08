@@ -7,6 +7,7 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import { auth } from "@clerk/nextjs";
 import initStripe from "stripe";
+import Billing from "../database/models/billing.model";
 
 // CREATE
 export async function createUser(user) {
@@ -14,6 +15,14 @@ export async function createUser(user) {
     await connectToDatabase();
 
     const newUser = await User.create(user);
+    if (!newUser) {
+      throw new Error("User not created");
+    }
+
+    const billing = await Billing.create({
+      planName: "free",
+      user: newUser._id,
+    });
 
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
@@ -57,12 +66,10 @@ export async function updateUser(clerkId, user) {
 export async function createStripeCustomer(id, username, email) {
   try {
     const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
-    console.log(email);
     const customer = await stripe.customers.create({
       name: username,
       email: email,
     });
-    console.log(customer);
 
     await connectToDatabase();
 

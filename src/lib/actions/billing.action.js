@@ -4,28 +4,85 @@ import { connectToDatabase } from "../database/mongoose";
 import { auth } from "@clerk/nextjs";
 import { createStripeCustomer, getUserById } from "./user.actions";
 import { revalidatePath } from "next/cache";
+import initStripe from "stripe";
 
-export async function charge() {
+export async function charge(planName) {
   try {
     const { userId } = auth();
     await connectToDatabase();
-    const user = await getUserById(userId);
+    let user = await getUserById(userId);
     if (!user) {
       throw new Error("User not found");
     }
-    console.log(user);
+
     if (!user.stripe_id) {
-      const updatedUser = await createStripeCustomer(
-        user._id,
-        user.username,
-        user.email
-      );
-      console.log(updatedUser);
-    } else {
-      console.log("stripe_id exist");
+      user = await createStripeCustomer(user._id, user.username, user.email);
     }
 
-    revalidatePath("/editor");
+    let priceId = null;
+
+    if (planName === "starter") {
+      priceId = "price_1PPB9sGJ0qDgL9Yh9tt2IrZt";
+    } else if (planName === "pro") {
+      priceId = "price_1PPBFQGJ0qDgL9YhZzf8LT5G";
+    } else if ("premium") {
+      priceId = "price_1PPJoQGJ0qDgL9YhFO3qxe2e";
+    }
+    const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+
+    const checkoutSession = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      customer: user.stripe_id,
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      success_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/success`,
+      cancel_url: process.env.NEXT_PUBLIC_WEBSITE_URL + `/payment/cancel`,
+      subscription_data: {
+        metadata: {
+          payingUserId: user.id,
+        },
+      },
+    });
+
+    if (!checkoutSession.url) {
+      throw new Error(`Could not create checkout session`);
+    }
+    revalidatePath("/invoices");
+    return JSON.parse(JSON.stringify({ session: checkoutSession }));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function customerInvoices() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    if (!user.stripe_id) {
+      user = await createStripeCustomer(user._id, user.username, user.email);
+    }
+
+    const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+
+    const { data } = await stripe.invoices.list();
+    let invoices = [];
+    data.map((invoice) => {
+      if (invoice.customer === user.stripe_id) {
+        invoices.push(invoice);
+      }
+    });
+    revalidatePath("/invoices");
+    return JSON.parse(JSON.stringify(invoices));
   } catch (error) {
     handleError(error);
   }

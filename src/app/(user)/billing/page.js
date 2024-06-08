@@ -1,9 +1,19 @@
 "use client";
 import { charge } from "@/lib/actions/billing.action";
+import { loadStripe } from "@stripe/stripe-js";
 
 const page = () => {
-  const chargeBill = async () => {
-    await charge();
+  const chargeBill = async (planName) => {
+    try {
+      const response = await charge(planName);
+      if (response) {
+        const { session } = response;
+        const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+        await stripe.redirectToCheckout({ sessionId: session.id });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>
@@ -120,7 +130,7 @@ const page = () => {
             </li>
           </ul>
           <button
-            onClick={chargeBill}
+            onClick={() => chargeBill("starter")}
             className="text-white bg-Bprimary-600 hover:bg-Bprimary-700 focus:ring-4 focus:ring-Bprimary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-Bprimary-900"
           >
             Activate
@@ -230,7 +240,7 @@ const page = () => {
             </li>
           </ul>
           <button
-            onClick={chargeBill}
+            onClick={() => chargeBill("pro")}
             className="text-white bg-Bprimary-600 hover:bg-Bprimary-700 focus:ring-4 focus:ring-Bprimary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-Bprimary-900"
           >
             Activate
@@ -340,7 +350,7 @@ const page = () => {
             </li>
           </ul>
           <button
-            onClick={chargeBill}
+            onClick={() => chargeBill("premium")}
             className="text-white bg-Bprimary-600 hover:bg-Bprimary-700 focus:ring-4 focus:ring-Bprimary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-Bprimary-900"
           >
             Activate
