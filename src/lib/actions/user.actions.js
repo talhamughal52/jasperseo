@@ -8,6 +8,8 @@ import { handleError } from "../utils";
 import { auth } from "@clerk/nextjs";
 import initStripe from "stripe";
 import Billing from "../database/models/billing.model";
+import ContentEditor from "@/lib/database/models/contentEditor.model";
+import TopWebsite from "@/lib/database/models/topWebsite.model";
 
 // CREATE
 export async function createUser(user) {
@@ -120,6 +122,12 @@ export async function deleteUser(clerkId) {
 
     // Delete user
     const deletedUser = await User.findByIdAndDelete(userToDelete._id);
+    await Billing.findOneAndDelete({ user: userToDelete._id });
+    const userEditors = await ContentEditor.find({ user: userToDelete._id });
+    for (const editor of userEditors) {
+      console.log(editor._id);
+      await TopWebsite.findOneAndDelete({ contentEdior: editor._id });
+    }
     revalidatePath("/");
 
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
