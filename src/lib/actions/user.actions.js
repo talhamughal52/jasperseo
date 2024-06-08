@@ -173,7 +173,7 @@ export async function checkUserBalance(userId) {
   try {
     await connectToDatabase();
 
-    const userBill = await Billing.find({ user: userId });
+    const userBill = await Billing.findOne({ user: userId });
 
     return JSON.parse(JSON.stringify(userBill));
   } catch (error) {
