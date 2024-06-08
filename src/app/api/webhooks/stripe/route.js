@@ -28,7 +28,7 @@ export async function POST(request) {
     const updateedBillingDetial = {
       planName: planName,
       totalEditors: editors,
-      activationDate: Date.now,
+      activationDate: Date.now(),
     };
     console.log(billingDetial);
 
