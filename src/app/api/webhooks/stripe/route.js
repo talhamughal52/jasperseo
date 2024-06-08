@@ -25,23 +25,23 @@ export async function POST(request) {
     const { planName, user, editors } = metadata;
     console.log(event.data.object);
 
-    const billingDetial = {
+    const updateedBillingDetial = {
       planName: planName,
       totalEditors: editors,
-      activationDate: Date.now(),
+      activationDate: Date.now,
     };
     console.log(billingDetial);
 
-    const updateedBillingDetial = await updateUserBillingDetial(
+    const billingDetial = await updateUserBillingDetial(
       user,
-      billingDetial
+      updateedBillingDetial
     );
     // const newTransaction = await createTransaction(transaction);
 
     // return NextResponse.json({ message: "OK", transaction: newTransaction });
     return NextResponse.json({
       message: "OK",
-      updateedBillingDetial,
+      billingDetial,
     });
   }
 

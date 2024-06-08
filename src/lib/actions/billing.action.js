@@ -115,7 +115,7 @@ export async function getUserBillingDetial() {
   }
 }
 
-export async function updateUserBillingDetial(user) {
+export async function updateUserBillingDetial(user, updateedBillingDetial) {
   try {
     await connectToDatabase();
     let billingDetial = await Billing.findOneAndUpdate(
@@ -123,7 +123,7 @@ export async function updateUserBillingDetial(user) {
         user: user,
       },
       {
-        billingDetial,
+        updateedBillingDetial,
       },
       {
         new: true,
