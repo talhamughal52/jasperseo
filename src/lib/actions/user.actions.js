@@ -45,6 +45,21 @@ export async function getUserById(userId) {
   }
 }
 
+// READ
+export async function getUserByStripeId(stripe_id) {
+  try {
+    await connectToDatabase();
+
+    const user = await User.findOne({ stripe_id: stripe_id });
+
+    if (!user) throw new Error("User not found");
+
+    return JSON.parse(JSON.stringify(user));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
 // UPDATE
 export async function updateUser(clerkId, user) {
   try {

@@ -5,8 +5,6 @@ export default authMiddleware({
     "/about",
     "/pricing",
     "/contact",
-    "/payment/success",
-    "/payment/cancel",
     "/api/webhooks/clerk",
     "/api/webhooks/stripe",
   ],

@@ -2,7 +2,11 @@
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { auth } from "@clerk/nextjs";
-import { createStripeCustomer, getUserById } from "./user.actions";
+import {
+  createStripeCustomer,
+  getUserById,
+  getUserByStripeId,
+} from "./user.actions";
 import { revalidatePath } from "next/cache";
 import initStripe from "stripe";
 import Billing from "../database/models/billing.model";
@@ -102,6 +106,37 @@ export async function getUserBillingDetial() {
     const billingDetial = await Billing.findOne({
       user: user._id,
     });
+    revalidatePath("/billing");
+    return JSON.parse(JSON.stringify(billingDetial));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function updateUserBillingDetial(stripe_id) {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserByStripeId(stripe_id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    let billingDetial = await Billing.findOne({
+      user: user._id,
+    });
+
+    if (!billingDetial) {
+      throw new Error("User Billing Detial not found");
+    }
+
+    billingDetial.activationDate = Date.now();
+    billingDetial.totalEditors = 6;
+    await billingDetial.save();
+
+    billingDetial = await Billing.findOne({
+      user: user._id,
+    });
+
     revalidatePath("/billing");
     return JSON.parse(JSON.stringify(billingDetial));
   } catch (error) {
