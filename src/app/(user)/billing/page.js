@@ -64,7 +64,7 @@ const page = async ({ searchParams }) => {
               another payment
             </p>
             <p className="text-gray-700 text-base text-right pr-10">
-              <RenewalSwitch />
+              <RenewalSwitch renewal={billingDetail.renewal} />
             </p>
           </div>
         </div>

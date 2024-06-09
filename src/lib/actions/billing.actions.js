@@ -191,3 +191,23 @@ export async function getUserTotalPayment() {
     handleError(error);
   }
 }
+
+export async function autoRenew() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const billingDetial = await Billing.findOne({
+      user: user._id,
+    });
+    billingDetial.renewal = !billingDetial.renewal;
+    await billingDetial.save();
+    revalidatePath("/billing");
+    return JSON.parse(JSON.stringify(true));
+  } catch (error) {
+    handleError(error);
+  }
+}
