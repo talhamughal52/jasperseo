@@ -64,7 +64,7 @@ export async function charge(planName) {
       throw new Error(`Could not create checkout session`);
     }
     revalidatePath("/invoices");
-    revalidatePath("/home");
+    revalidatePath("/dashboard");
     revalidatePath("/billing");
     return JSON.parse(JSON.stringify({ session: checkoutSession }));
   } catch (error) {

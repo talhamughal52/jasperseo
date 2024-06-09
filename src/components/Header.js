@@ -172,7 +172,7 @@ export default function Header() {
                       <Link
                         className="wpr-button wpr-button-effect wpr-button-none"
                         data-text="Go"
-                        href="/home"
+                        href="/dashboard"
                       >
                         <span className="wpr-button-content">
                           <span className="wpr-button-text">Start Free</span>

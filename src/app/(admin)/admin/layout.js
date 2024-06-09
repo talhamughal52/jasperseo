@@ -6,7 +6,7 @@ import StoreProvider from "@/store/StoreProvider";
 
 const Layout = async ({ children }) => {
   const isAdmin = await isAdminUser();
-  if (!isAdmin) redirect("/home");
+  if (!isAdmin) redirect("/dashboard");
 
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
