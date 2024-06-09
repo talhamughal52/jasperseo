@@ -175,7 +175,7 @@ const TextEditor = ({
       style={{ height: "90vh", width: "69%" }}
       value={content}
       onChange={handleChange}
-      className="dark:text-white"
+      className="dark:text-white dark:bg-boxdark"
     />
   );
 };

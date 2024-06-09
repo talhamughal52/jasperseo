@@ -92,3 +92,36 @@
   @apply dark:bg-meta-4;
   @apply dark:text-white;
 }
+
+.rdt_Pagination button {
+  @apply dark:text-white;
+  @apply dark:fill-white;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.MuiDrawer-paper,
+.ql-snow .ql-picker-options {
+  @apply dark:bg-meta-4;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item::before,
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  @apply dark:text-white;
+}
+
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  @apply dark:fill-white;
+}
+
+.ql-snow .ql-stroke {
+  @apply dark:fill-white;
+  @apply dark:stroke-white;
+}

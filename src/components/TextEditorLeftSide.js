@@ -75,11 +75,14 @@ const TextEditorLeftSide = ({
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Compatitors" value="1" />
+              <Tab
+                value="1"
+                label={<span className="dark:text-white">Compatitors</span>}
+              />
               <Tab
                 label={
                   <div className="flex">
-                    <span>Compatitors Terms</span>
+                    <span className="dark:text-white">Compatitors Terms</span>
                     <span className="bg-red text-white px-1 ml-2">BETA</span>
                   </div>
                 }
@@ -93,13 +96,16 @@ const TextEditorLeftSide = ({
               className="col s12"
               style={{ display: "block" }}
             >
-              <h4 className="text-lg font-semibold">Settings</h4>
-              <h6 className="text-base font-semibold">Url</h6>
+              <h4 className="text-lg font-semibold dark:text-white">
+                Settings
+              </h4>
+              <h6 className="text-base font-semibold dark:text-white">Url</h6>
               <form action={handleSubmit} method="post">
                 <FormGroup>
                   {topwebsites.map((website, index) => (
                     <div key={index}>
                       <FormControlLabel
+                        className="dark:text-white"
                         control={
                           <Checkbox
                             name="websites"
@@ -132,7 +138,7 @@ const TextEditorLeftSide = ({
           </TabPanel>
           <TabPanel value="2">
             <div id="terms" className="col s12">
-              <h6 className="text-xl font-semibold">
+              <h6 className="text-xl font-semibold dark:text-white">
                 Headings From Competitors
               </h6>
               <ul className="divide-y divide-gray-200">
@@ -144,12 +150,18 @@ const TextEditorLeftSide = ({
                   return (
                     <>
                       {heading1.map((head, index) => (
-                        <li key={`heading1_${index}`} className="py-2">
+                        <li
+                          key={`heading1_${index}`}
+                          className="py-2 dark:text-white"
+                        >
                           {head}
                         </li>
                       ))}
                       {heading2.map((head, index) => (
-                        <li key={`heading2_${index}`} className="py-2">
+                        <li
+                          key={`heading2_${index}`}
+                          className="py-2 dark:text-white"
+                        >
                           {head}
                         </li>
                       ))}
@@ -173,17 +185,23 @@ const TextEditorLeftSide = ({
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="GUIDLINES" value="1" />
+              <Tab
+                label={<span className="dark:text-white">GUIDLINES</span>}
+                value="1"
+              />
               <Tab
                 label={
                   <div className="flex">
-                    <span>OUTLINE</span>
+                    <span className="dark:text-white">OUTLINE</span>
                     <span className="bg-red text-white px-1 ml-2">BETA</span>
                   </div>
                 }
                 value="2"
               />
-              <Tab label="BRIEF" value="3" />
+              <Tab
+                label={<span className="dark:text-white">BRIEF</span>}
+                value="3"
+              />
             </TabList>
           </Box>
           <TabPanel value="1">
@@ -405,12 +423,16 @@ const TextEditorLeftSide = ({
                             aria-label="lab API tabs example"
                           >
                             <Tab
-                              label="NLP"
+                              label={
+                                <span className="dark:text-white">NLP</span>
+                              }
                               value="1"
                               style={{ margin: "auto" }}
                             />
                             <Tab
-                              label="HEADING"
+                              label={
+                                <span className="dark:text-white">HEADING</span>
+                              }
                               value="2"
                               style={{ margin: "auto" }}
                             />
@@ -456,7 +478,7 @@ const TextEditorLeftSide = ({
             <div className="col s12 py-3">
               <h6>Generated Outline</h6>
             </div>
-            <Accordion style={{ backgroundColor: "transparent" }}>
+            <Accordion className="dark:text-white dark:bg-boxdark">
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1-content"
@@ -469,11 +491,13 @@ const TextEditorLeftSide = ({
           </TabPanel>
           <TabPanel value="3">
             <div className="col-span-12">
-              <h6 className="text-center underline">Competitors</h6>
+              <h6 className="text-center underline dark:text-white">
+                Competitors
+              </h6>
               <ul className="divide-y divide-gray-200 border-none">
                 {websites.map((website, index) => (
                   <li key={index} className="py-2">
-                    <a href={website.url} className="block">
+                    <a href={website.url} className="block dark:text-white">
                       {website.url}
                     </a>
                   </li>
