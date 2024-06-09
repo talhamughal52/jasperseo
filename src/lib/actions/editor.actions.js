@@ -97,15 +97,23 @@ export const setupInitialEditor = async (newContentEditor) => {
   }
 };
 
-export async function getUserEditors() {
+export async function getUserEditors(admin = false) {
   try {
     const { userId } = auth();
     await connectToDatabase();
     const user = await getUserById(userId);
-    const userContentEditors = await ContentEditor.find({
-      user: user._id,
-    });
-    return JSON.parse(JSON.stringify(userContentEditors));
+    if (admin) {
+      const contentEditors = await ContentEditor.find().populate(
+        "user",
+        "username"
+      );
+      return JSON.parse(JSON.stringify(contentEditors));
+    } else {
+      const userContentEditors = await ContentEditor.find({
+        user: user._id,
+      });
+      return JSON.parse(JSON.stringify(userContentEditors));
+    }
   } catch (error) {
     handleError(error);
   }

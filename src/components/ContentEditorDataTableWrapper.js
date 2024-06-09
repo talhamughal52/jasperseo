@@ -1,9 +1,11 @@
 import { getUserEditors } from "@/lib/actions/editor.actions";
 import ContentEditorDataTable from "./ContentEditorDataTable";
 
-const ContentEditorDataTableWrapper = async () => {
-  const contentEditors = await getUserEditors();
-  return <ContentEditorDataTable contentEditors={contentEditors} />;
+const ContentEditorDataTableWrapper = async ({ admin = false }) => {
+  const contentEditors = await getUserEditors(admin);
+  return (
+    <ContentEditorDataTable contentEditors={contentEditors} admin={admin} />
+  );
 };
 
 export default ContentEditorDataTableWrapper;

@@ -72,7 +72,7 @@ export async function charge(planName) {
   }
 }
 
-export async function customerInvoices() {
+export async function customerInvoices(admin = false) {
   try {
     const { userId } = auth();
     await connectToDatabase();
@@ -89,11 +89,16 @@ export async function customerInvoices() {
 
     const { data } = await stripe.invoices.list();
     let invoices = [];
-    data.map((invoice) => {
-      if (invoice.customer === user.stripe_id) {
-        invoices.push(invoice);
-      }
-    });
+
+    if (admin) {
+      invoices = data;
+    } else {
+      data.map((invoice) => {
+        if (invoice.customer === user.stripe_id) {
+          invoices.push(invoice);
+        }
+      });
+    }
     revalidatePath("/invoices");
     return JSON.parse(JSON.stringify(invoices));
   } catch (error) {

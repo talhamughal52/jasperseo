@@ -2,8 +2,8 @@ import { customerInvoices } from "@/lib/actions/billing.actions";
 
 import Skeleton from "@mui/material/Skeleton";
 
-const InovicesTable = async () => {
-  const invoices = await customerInvoices();
+const InovicesTable = async ({ admin = false }) => {
+  const invoices = await customerInvoices(admin);
   // await new Promise((resolve) => setTimeout(resolve, 50000));
   const convertTimestampToDate = (timestamp) => {
     const months = [
@@ -45,6 +45,11 @@ const InovicesTable = async () => {
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
                 Status
               </th>
+              {admin && (
+                <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
+                  Email
+                </th>
+              )}
               <th className="px-4 py-4 font-medium text-black dark:text-white">
                 Actions
               </th>
@@ -74,7 +79,6 @@ const InovicesTable = async () => {
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <p className="text-black dark:text-white">
                       {convertTimestampToDate(invoice.period_start)}
-                      {/* {moment(invoice.period_start)} */}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
@@ -91,6 +95,13 @@ const InovicesTable = async () => {
                         invoice.status.slice(1)}
                     </p>
                   </td>
+                  {admin && (
+                    <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                      <p className="text-black dark:text-white">
+                        {invoice.customer_email}
+                      </p>
+                    </td>
+                  )}
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <div className="flex items-center space-x-3.5">
                       <a
