@@ -67,3 +67,28 @@
   background-color: transparent !important;
   @apply dark:text-white;
 }
+
+.cl-userButton-popover {
+  @apply dark:border-strokedark;
+  @apply dark:bg-meta-4;
+  @apply dark:text-white;
+}
+
+.cl-userPreviewSecondaryIdentifier__userButton,
+.cl-userButtonPopoverActionButtonText,
+.cl-userButtonPopoverActionButtonText,
+.cl-userButtonPopoverActionButtonIcon,
+.cl-headerTitle,
+.cl-headerSubtitle,
+.cl-profileSectionTitleText,
+.cl-userPreviewMainIdentifier > span,
+.cl-profileSectionContent__username > p,
+.cl-navbarButton {
+  @apply dark:text-white;
+}
+
+.cl-internal-rx251b {
+  @apply dark:border-strokedark;
+  @apply dark:bg-meta-4;
+  @apply dark:text-white;
+}

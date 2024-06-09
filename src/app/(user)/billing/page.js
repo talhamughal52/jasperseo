@@ -9,10 +9,10 @@ const page = async ({ searchParams }) => {
   date = date.toISOString().split("T")[0];
   return (
     <BillingWrapper>
-      <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center">
-        <div className="w-full border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center bg-white border border-stroke dark:bg-boxdark dark:border-strokedark rounded-sm shadow-default">
+        <div className="w-full rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8">
-            <p className="text-sm text-gray-600 flex items-center">
+            <p className="text-sm text-gray-600 flex items-center dark:text-white">
               <svg
                 className="fill-current text-gray-500 w-3 h-3 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -22,42 +22,44 @@ const page = async ({ searchParams }) => {
               </svg>
               Users only
             </p>
-            <div className="text-gray-900 font-bold text-xl mb-2">
+            <div className="text-gray-900 font-bold text-xl mb-2 dark:text-white">
               Current Plan
             </div>
-            <p className="text-gray-700 text-base text-right pr-10 font-bold">
+            <p className="text-gray-700 text-base text-right pr-10 font-bold dark:text-white">
               {billingDetail.planName.charAt(0).toUpperCase() +
                 billingDetail.planName.slice(1)}
             </p>
           </div>
           <div className="mb-8">
-            <div className="text-gray-900 font-bold text-xl mb-2">
+            <div className="text-gray-900 font-bold text-xl mb-2 dark:text-white">
               Available Content Editors
             </div>
-            <p className="text-gray-700 text-base text-right pr-10 font-bold">
+            <p className="text-gray-700 text-base text-right pr-10 font-bold dark:text-white">
               {billingDetail.totalEditors}
             </p>
           </div>
           <div className="mb-8">
-            <div className="text-gray-900 font-bold text-xl mb-2">
+            <div className="text-gray-900 font-bold text-xl mb-2 dark:text-white">
               Used Content Editors
             </div>
-            <p className="text-gray-700 text-base text-right pr-10 font-bold">
+            <p className="text-gray-700 text-base text-right pr-10 font-bold dark:text-white">
               {billingDetail.usedEditors}
             </p>
           </div>
           <div className="mb-8">
-            <div className="text-gray-900 font-bold text-xl mb-2">Renewal</div>
-            <p className="text-gray-700 text-base text-right pr-10">
+            <div className="text-gray-900 font-bold text-xl mb-2 dark:text-white">
+              Renewal
+            </div>
+            <p className="text-gray-700 text-base text-right pr-10 dark:text-white">
               Your current plan activation date{" "}
               <span className="font-bold">{date}</span>
             </p>
           </div>
           <div className="mb-8">
-            <div className="text-gray-900 font-bold text-xl mb-2">
+            <div className="text-gray-900 font-bold text-xl mb-2 dark:text-white">
               Auto Renew
             </div>
-            <p className="text-gray-700 text-base">
+            <p className="text-gray-700 text-base dark:text-white">
               This means we will charge the card on file when its time to make
               another payment
             </p>
