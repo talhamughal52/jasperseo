@@ -208,14 +208,16 @@ const TextEditorLeftSide = ({
             <div className="row">
               <div className="col s12">
                 <div className="flex">
-                  <h6 style={{ display: "inline" }}>{contentEditor.keyword}</h6>
+                  <h6 style={{ display: "inline" }} className="dark:text-white">
+                    {contentEditor.keyword}
+                  </h6>
                   <Tooltip
-                    title={<h1 className="text-base">Competitor Analysis</h1>}
+                    title={<h1 className="text-base ">Competitor Analysis</h1>}
                     arrow
                   >
                     <SettingsIcon
                       onClick={toggleDrawer(true)}
-                      className="ml-auto cursor-pointer hover:text-blue-900"
+                      className="ml-auto cursor-pointer hover:text-blue-900 dark:text-white"
                     />
                   </Tooltip>
                   <Drawer
@@ -236,7 +238,7 @@ const TextEditorLeftSide = ({
                   </Drawer>
                 </div>
                 <h6
-                  className="py-3"
+                  className="py-3 dark:text-white"
                   style={{ textAlign: "center", textDecoration: "underline" }}
                 >
                   Content Score
@@ -254,12 +256,13 @@ const TextEditorLeftSide = ({
                         textAlign: "center",
                         textDecoration: "underline",
                       }}
+                      className="dark:text-white"
                     >
                       Content Structure
                     </h6>
                   </caption>
                   <thead>
-                    <tr className=" border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                       <th className="pb-2">Name</th>
                       <th>Max</th>
                       <th>Min</th>
@@ -270,7 +273,7 @@ const TextEditorLeftSide = ({
                   <tbody>
                     <tr
                       id="words"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         words
@@ -281,7 +284,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="h1"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h1
@@ -292,7 +295,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="h2"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h2
@@ -303,7 +306,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="h3"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h3
@@ -314,7 +317,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="h4"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h4
@@ -325,7 +328,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="h5"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h5
@@ -336,7 +339,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="h6"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         h6
@@ -347,7 +350,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="images"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         Images
@@ -358,7 +361,7 @@ const TextEditorLeftSide = ({
                     </tr>
                     <tr
                       id="paragraph"
-                      className=" border-b dark:bg-gray-800 dark:border-gray-700"
+                      className=" border-b dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                     >
                       <td style={{ fontWeight: "500" }} className="pb-2">
                         Paragraph
@@ -377,7 +380,7 @@ const TextEditorLeftSide = ({
                 <div className="row">
                   <div className="col s12">
                     <h6
-                      className="py-3"
+                      className="py-3 dark:text-white"
                       style={{
                         textAlign: "center",
                         textDecoration: "underline",
@@ -405,7 +408,7 @@ const TextEditorLeftSide = ({
                   </div>
                   <div className="col s12">
                     <h6
-                      className="py-3"
+                      className="py-3 dark:text-white"
                       style={{
                         textAlign: "center",
                         textDecoration: "underline",
