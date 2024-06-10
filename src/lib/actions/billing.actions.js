@@ -216,3 +216,19 @@ export async function autoRenew() {
     handleError(error);
   }
 }
+
+export async function getAllUsersBillingDetial() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserById(userId);
+    const allUsersBillingDetial = await Billing.find().populate({
+      path: "user",
+      select: "username email",
+    });
+    revalidatePath("/billing");
+    return JSON.parse(JSON.stringify(allUsersBillingDetial));
+  } catch (error) {
+    handleError(error);
+  }
+}

@@ -58,19 +58,34 @@ const ContentEditorDataTable = ({ contentEditors, admin }) => {
   }
 
   useEffect(() => {
-    const result = contentEditors.filter((contentEditor) => {
-      return (
-        contentEditor.keyword.toLowerCase().includes(search.toLowerCase()) ||
-        contentEditor.country.toLowerCase().includes(search.toLowerCase()) ||
-        contentEditor.countryCode.toLowerCase().includes(search.toLowerCase())
-      );
-    });
+    let result = null;
+    if (admin) {
+      result = contentEditors.filter((contentEditor) => {
+        return (
+          contentEditor.keyword.toLowerCase().includes(search.toLowerCase()) ||
+          contentEditor.country.toLowerCase().includes(search.toLowerCase()) ||
+          contentEditor.status.toLowerCase().includes(search.toLowerCase()) ||
+          contentEditor.user.username
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          contentEditor.countryCode.toLowerCase().includes(search.toLowerCase())
+        );
+      });
+    } else {
+      result = contentEditors.filter((contentEditor) => {
+        return (
+          contentEditor.keyword.toLowerCase().includes(search.toLowerCase()) ||
+          contentEditor.country.toLowerCase().includes(search.toLowerCase()) ||
+          contentEditor.status.toLowerCase().includes(search.toLowerCase()) ||
+          contentEditor.countryCode.toLowerCase().includes(search.toLowerCase())
+        );
+      });
+    }
 
     setFilteredContentEditors(result);
   }, [search]);
   return (
     <DataTable
-      // title="Keywords"
       title={
         <span className="text-title-md2  text-black dark:text-white py-4">
           Keywords
@@ -89,23 +104,23 @@ const ContentEditorDataTable = ({ contentEditors, admin }) => {
       fixedHeaderScrollHeight="350px"
       subHeader
       subHeaderComponent={
-        !admin && (
-          <div>
-            <input
-              type="text"
-              placeholder="Search here"
-              value={search}
-              className="rounded-lg border-[1.5px] border-stroke bg-transparent px-4 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-              onChange={(e) => setSearch(e.target.value)}
-            />
+        <div>
+          <input
+            type="text"
+            placeholder="Search here"
+            value={search}
+            className="rounded-lg border-[1.5px] border-stroke bg-transparent px-4 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {!admin && (
             <Link
               href="/editor/create"
               className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:bg-opacity-90`}
             >
               Create Editor
             </Link>
-          </div>
-        )
+          )}
+        </div>
       }
     />
   );
@@ -113,7 +128,7 @@ const ContentEditorDataTable = ({ contentEditors, admin }) => {
 
 export default ContentEditorDataTable;
 
-export const ContentEditorDataTableLoader = () => {
+export const ContentEditorDataTableLoader = ({ admin = false }) => {
   const columns = [
     {
       name: "Keyword",
@@ -180,12 +195,14 @@ export const ContentEditorDataTableLoader = () => {
             placeholder="Search here"
             className="rounded-lg border-[1.5px] border-stroke bg-transparent px-4 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
-          <Link
-            href="/editor/create"
-            className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:bg-opacity-90`}
-          >
-            Create Editor
-          </Link>
+          {!admin && (
+            <Link
+              href="/editor/create"
+              className={`bg-black text-white items-center rounded-md px-4 py-2.5 font-medium ml-3 hover:bg-opacity-90`}
+            >
+              Create Editor
+            </Link>
+          )}
         </div>
       }
     />

@@ -203,6 +203,7 @@ export const InovicesTableLoader = () => {
           <tbody></tbody>
         </table>
         <Skeleton
+          className="my-4"
           variant="rectangular"
           animation="wave"
           width="100%"
