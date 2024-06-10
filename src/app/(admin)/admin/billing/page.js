@@ -1,6 +1,6 @@
 import { BillingDetailsDataTableLoader } from "@/components/BillingDetailsDataTable";
 import BillingDetailsDataTableWrapper from "@/components/BillingDetailsDataTableWrapper";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 
 const page = async () => {
   return (
