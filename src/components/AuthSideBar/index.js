@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const isAdmin = useSelector((state) => state.isAdmin.value);
@@ -230,6 +231,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   >
                     <CreditCardOutlinedIcon />
                     Billing Details
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/admin/contacts"
+                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      pathname.includes("contacts") &&
+                      "bg-graydark dark:bg-meta-4"
+                    }`}
+                  >
+                    <AssignmentIndIcon />
+                    Contacts
                   </Link>
                 </li>
               </ul>

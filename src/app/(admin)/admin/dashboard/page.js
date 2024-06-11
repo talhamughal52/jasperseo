@@ -1,5 +1,17 @@
+import AdminDashboardCards, {
+  AdminDashboardCardsLoader,
+} from "@/components/AdminDashboardCards";
+import { Suspense } from "react";
+
 const page = () => {
-  return <h2>Admin Dashboard</h2>;
+  return (
+    <>
+      <Suspense fallback={<AdminDashboardCardsLoader />}>
+        <AdminDashboardCards />
+        {/* <AdminDashboardCardsLoader /> */}
+      </Suspense>
+    </>
+  );
 };
 
 export default page;

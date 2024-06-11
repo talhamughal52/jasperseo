@@ -3,47 +3,50 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Skeleton from "@mui/material/Skeleton";
 
-const UsersDataTable = ({ users }) => {
-  const [filteredUsers, setFilteredUsers] = useState(users);
+export const ContactsDataTable = ({ contacts }) => {
+  const [filteredContacts, setFilteredContacts] = useState(contacts);
   const [search, setSearch] = useState("");
   const columns = [
     {
       name: "Name",
-      selector: (row) => `${row.firstName} ${row.lastName}`,
-    },
-    {
-      name: "Username",
-      selector: (row) => row.username,
+      selector: (row) => row.name,
     },
     {
       name: "Email",
       selector: (row) => row.email,
     },
+    {
+      name: "Subject",
+      selector: (row) => row.subject,
+    },
+    {
+      name: "Message",
+      selector: (row) => row.message,
+    },
   ];
 
   useEffect(() => {
-    const result = users.filter((user) => {
+    const result = contacts.filter((contact) => {
       return (
-        user.username.toLowerCase().includes(search.toLowerCase()) ||
-        `${user.firstName} ${user.lastName}`
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        user.email.toLowerCase().includes(search.toLowerCase())
+        contact.name.toLowerCase().includes(search.toLowerCase()) ||
+        contact.email.toLowerCase().includes(search.toLowerCase()) ||
+        contact.subject.toLowerCase().includes(search.toLowerCase()) ||
+        contact.message.toLowerCase().includes(search.toLowerCase())
       );
     });
 
-    setFilteredUsers(result);
+    setFilteredContacts(result);
   }, [search]);
 
   return (
     <DataTable
       title={
         <span className="text-title-md2  text-black dark:text-white py-4">
-          Users
+          Contacts
         </span>
       }
       columns={columns}
-      data={filteredUsers}
+      data={filteredContacts}
       pagination
       highlightOnHover
       fixedHeader
@@ -62,23 +65,12 @@ const UsersDataTable = ({ users }) => {
   );
 };
 
-export default UsersDataTable;
+export default ContactsDataTable;
 
-export const UsersDataTableLoader = () => {
+export const ContactsDataTableLoader = () => {
   const columns = [
     {
       name: "Name",
-      selector: (row) => (
-        <Skeleton
-          variant="rectangular"
-          animation="wave"
-          width={210}
-          height={40}
-        />
-      ),
-    },
-    {
-      name: "Username",
       selector: (row) => (
         <Skeleton
           variant="rectangular"
@@ -99,14 +91,37 @@ export const UsersDataTableLoader = () => {
         />
       ),
     },
+    {
+      name: "Subject",
+      selector: (row) => (
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          width={210}
+          height={40}
+        />
+      ),
+    },
+    {
+      name: "Message",
+      selector: (row) => (
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          width={210}
+          height={40}
+        />
+      ),
+    },
   ];
+
   const data = [{}, {}, {}, {}, {}, {}];
 
   return (
     <DataTable
       title={
         <span className="text-title-md2  text-black dark:text-white py-4">
-          Users
+          Contacts
         </span>
       }
       columns={columns}

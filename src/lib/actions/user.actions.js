@@ -194,3 +194,40 @@ export async function getCurrentUserBalance() {
     handleError(error);
   }
 }
+
+export async function getUsersCount() {
+  try {
+    await connectToDatabase();
+    const usersCount = await User.countDocuments({});
+
+    return JSON.parse(JSON.stringify(usersCount));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+export async function getAllUsersBalance() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+
+    const usersBill = await Billing.find({});
+
+    const totalEditors = usersBill.reduce((total, bill) => {
+      return total + bill.totalEditors;
+    }, 0);
+
+    const usedEditors = usersBill.reduce((total, bill) => {
+      return total + bill.usedEditors;
+    }, 0);
+
+    const response = {
+      totalEditors,
+      usedEditors,
+    };
+
+    return JSON.parse(JSON.stringify(response));
+  } catch (error) {
+    handleError(error);
+  }
+}

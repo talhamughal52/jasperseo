@@ -197,6 +197,38 @@ export async function getUserTotalPayment() {
   }
 }
 
+export async function getTotalEarning() {
+  try {
+    const { userId } = auth();
+    await connectToDatabase();
+    let user = await getUserById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    if (!user.stripe_id) {
+      user = await createStripeCustomer(user._id, user.username, user.email);
+    }
+
+    const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+
+    const { data } = await stripe.invoices.list();
+    let totalEarnings = [];
+    data.map((invoice) => {
+      totalEarnings.push(parseInt(invoice.total));
+    });
+    let sum = totalEarnings.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    sum = sum / 100;
+    revalidatePath("/invoices");
+    return JSON.parse(JSON.stringify(sum));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
 export async function autoRenew() {
   try {
     const { userId } = auth();

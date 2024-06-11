@@ -4,6 +4,7 @@ import User from "../database/models/user.model";
 import ContentEditor from "@/lib/database/models/contentEditor.model";
 import TopWebsite from "@/lib/database/models/topWebsite.model";
 import Billing from "../database/models/billing.model";
+import Contact from "../database/models/contact.model";
 
 export async function refreshDatabase() {
   "use server";
@@ -13,6 +14,7 @@ export async function refreshDatabase() {
     // await ContentEditor.deleteMany();
     // await TopWebsite.deleteMany();
     // await Billing.deleteMany();
+    // await Contact.deleteMany();
   } catch (error) {
     handleError(error);
   }

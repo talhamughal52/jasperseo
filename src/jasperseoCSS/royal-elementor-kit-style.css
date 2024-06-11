@@ -299,7 +299,7 @@ button:focus,
 [type="button"]:hover,
 [type="button"]:focus {
   color: #fff;
-  background-color: #605be5;
+  /* background-color: #605be5; */
   text-decoration: none;
 }
 button:not(:disabled),

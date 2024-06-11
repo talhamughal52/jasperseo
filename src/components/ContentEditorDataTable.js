@@ -180,7 +180,11 @@ export const ContentEditorDataTableLoader = ({ admin = false }) => {
 
   return (
     <DataTable
-      title="Keywords"
+      title={
+        <span className="text-title-md2  text-black dark:text-white py-4">
+          Keywords
+        </span>
+      }
       columns={columns}
       data={data}
       pagination
