@@ -18,8 +18,6 @@ export default async function page() {
         </Suspense>
       </div>
       <div className="ContentEditorDataTableWrapper mt-4 md:mt-6 2xl:mt-7.5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        {/* <ContentEditorDataTableWrapper /> */}
-
         <Suspense fallback={<ContentEditorDataTableLoader />}>
           <ContentEditorDataTableWrapper />
         </Suspense>

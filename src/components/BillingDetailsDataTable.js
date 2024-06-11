@@ -10,16 +10,16 @@ const BillingDetailsDataTable = ({ allUsersBillingDetial }) => {
 
   const columns = [
     {
-      name: "Plan Name",
-      selector: (row) => row.planName,
-    },
-    {
       name: "Username",
       selector: (row) => row.user.username,
     },
     {
       name: "Email",
       selector: (row) => row.user.email,
+    },
+    {
+      name: "Plan Name",
+      selector: (row) => row.planName,
     },
     {
       name: "Total Editors",
@@ -61,10 +61,10 @@ const BillingDetailsDataTable = ({ allUsersBillingDetial }) => {
 
   return (
     <DataTable
-      noDataComponent={
-        <div style={{ padding: "24px" }} className="text-black dark:text-white">
-          There are no records to display
-        </div>
+      title={
+        <span className="text-title-md2  text-black dark:text-white py-4">
+          Users Billing Details
+        </span>
       }
       columns={columns}
       data={filteredAllUsersBillingDetial}
@@ -93,17 +93,6 @@ export default BillingDetailsDataTable;
 export const BillingDetailsDataTableLoader = () => {
   const columns = [
     {
-      name: "Plan Name",
-      selector: (row) => (
-        <Skeleton
-          variant="rectangular"
-          animation="wave"
-          width={210}
-          height={40}
-        />
-      ),
-    },
-    {
       name: "Username",
       selector: (row) => (
         <Skeleton
@@ -116,6 +105,17 @@ export const BillingDetailsDataTableLoader = () => {
     },
     {
       name: "Email",
+      selector: (row) => (
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          width={210}
+          height={40}
+        />
+      ),
+    },
+    {
+      name: "Plan Name",
       selector: (row) => (
         <Skeleton
           variant="rectangular"
@@ -164,6 +164,11 @@ export const BillingDetailsDataTableLoader = () => {
 
   return (
     <DataTable
+      title={
+        <span className="text-title-md2  text-black dark:text-white py-4">
+          Users Billing Details
+        </span>
+      }
       columns={columns}
       data={data}
       pagination
