@@ -199,7 +199,6 @@ export async function getUsersCount() {
   try {
     await connectToDatabase();
     const usersCount = await User.countDocuments({});
-
     return JSON.parse(JSON.stringify(usersCount));
   } catch (error) {
     handleError(error);

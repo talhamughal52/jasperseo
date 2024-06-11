@@ -222,7 +222,7 @@ export async function getTotalEarning() {
       0
     );
     sum = sum / 100;
-    revalidatePath("/invoices");
+    revalidatePath("admin/invoices");
     return JSON.parse(JSON.stringify(sum));
   } catch (error) {
     handleError(error);
