@@ -1,4 +1,6 @@
 import Box from "@/components/Box";
+import AccordianComponent from "@/components/accordianComponent";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 
 function page() {
@@ -143,12 +145,22 @@ function page() {
                       </div>
                     </section>
                     <div className="elementor-repeater-item-7dbd9c6 wpr-pricing-table-item wpr-pricing-table-button">
-                      <Link
-                        className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
-                        href="/"
-                      >
-                        <span> GET START </span>
-                      </Link>
+                      <SignedIn>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/dashboard"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedIn>
+                      <SignedOut>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/sign-in"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedOut>
                     </div>
                     <div className="elementor-repeater-item-2c1a424 wpr-pricing-table-item wpr-pricing-table-text wpr-pricing-table-item-last"></div>
                     <div className="wpr-pricing-table-badge wpr-pricing-table-badge-cyrcle wpr-pricing-table-badge-right">
@@ -240,12 +252,22 @@ function page() {
                       </div>
                     </section>
                     <div className="elementor-repeater-item-7dbd9c6 wpr-pricing-table-item wpr-pricing-table-button">
-                      <Link
-                        className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
-                        href="/"
-                      >
-                        <span> GET START </span>
-                      </Link>
+                      <SignedIn>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/dashboard"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedIn>
+                      <SignedOut>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/sign-in"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedOut>
                     </div>
                     <div className="elementor-repeater-item-2c1a424 wpr-pricing-table-item wpr-pricing-table-text wpr-pricing-table-item-last"></div>
                   </div>
@@ -334,12 +356,23 @@ function page() {
                       </div>
                     </section>
                     <div className="elementor-repeater-item-ef378a6 wpr-pricing-table-item wpr-pricing-table-button">
-                      <Link
-                        className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
-                        href="/"
-                      >
-                        <span> GET START </span>
-                      </Link>
+                      <SignedIn>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/dashboard"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedIn>
+
+                      <SignedOut>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/sign-in"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedOut>
                     </div>
                     <div className="elementor-repeater-item-bc92d3c wpr-pricing-table-item wpr-pricing-table-text wpr-pricing-table-item-last"></div>
                   </div>
@@ -428,12 +461,23 @@ function page() {
                       </div>
                     </section>
                     <div className="elementor-repeater-item-3d9b430 wpr-pricing-table-item wpr-pricing-table-button">
-                      <a
-                        className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
-                        href="/"
-                      >
-                        <span> GET START </span>
-                      </a>
+                      <SignedIn>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/dashboard"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedIn>
+
+                      <SignedOut>
+                        <Link
+                          className="wpr-pricing-table-btn wpr-button-effect wpr-button-none"
+                          href="/sign-in"
+                        >
+                          <span> GET START </span>
+                        </Link>
+                      </SignedOut>
                     </div>
                     <div className="elementor-repeater-item-0b7b784 wpr-pricing-table-item wpr-pricing-table-text wpr-pricing-table-item-last"></div>
                   </div>
@@ -499,91 +543,25 @@ function page() {
                     data-accordion-trigger="click"
                     data-interaction-speed="0.4"
                   >
-                    <div className="wpr-accordion-item-wrap">
-                      <button className="wpr-acc-button wpr-acc-active">
-                        <span className="wpr-acc-item-title">
-                          <div className="wpr-acc-icon-box">
-                            <span className="wpr-title-icon"> </span>
-                          </div>
-                          <span className="wpr-acc-title-text">
-                            How do I purchase a package?
-                          </span>
-                        </span>
-                        <span className="wpr-toggle-icon wpr-ti-close">
-                          <i aria-hidden="true" className="fas fa-plus"></i>
-                        </span>
-                        <span className="wpr-toggle-icon wpr-ti-open">
-                          <i aria-hidden="true" className="fas fa-minus"></i>
-                        </span>
-                      </button>
-                      <div
-                        className="wpr-acc-panel wpr-acc-panel-active"
-                        style={{ display: "block" }}
-                      >
-                        <div className="wpr-acc-panel-content">
-                          <div className="collapsible-body">
-                            To purchase a package, Click on any package and
-                            enter your payment details. that's it
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="wpr-accordion-item-wrap">
-                      <button className="wpr-acc-button">
-                        <span className="wpr-acc-item-title">
-                          <div className="wpr-acc-icon-box">
-                            <span className="wpr-title-icon"> </span>
-                          </div>
-                          <span className="wpr-acc-title-text">
-                            Is it possible to request a refund if we don't like
-                            the product?
-                          </span>
-                        </span>
-                        <span className="wpr-toggle-icon wpr-ti-close">
-                          <i aria-hidden="true" className="fas fa-plus"></i>
-                        </span>
-                        <span className="wpr-toggle-icon wpr-ti-open">
-                          <i aria-hidden="true" className="fas fa-minus"></i>
-                        </span>
-                      </button>
-                      <div className="wpr-acc-panel">
-                        <div className="wpr-acc-panel-content">
-                          <p>
-                            Yes, you can get refund within three days of
-                            purchase. For refunds, please contact us via live
-                            support. After you sign up, you will have access to
-                            live support.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="wpr-accordion-item-wrap">
-                      <button className="wpr-acc-button">
-                        <span className="wpr-acc-item-title">
-                          <div className="wpr-acc-icon-box">
-                            <span className="wpr-title-icon"> </span>
-                          </div>
-                          <span className="wpr-acc-title-text">
-                            What methods of payment do you accept?
-                          </span>
-                        </span>
-                        <span className="wpr-toggle-icon wpr-ti-close">
-                          <i aria-hidden="true" className="fas fa-plus"></i>
-                        </span>
-                        <span className="wpr-toggle-icon wpr-ti-open">
-                          <i aria-hidden="true" className="fas fa-minus"></i>
-                        </span>
-                      </button>
-                      <div className="wpr-acc-panel">
-                        <div className="wpr-acc-panel-content">
-                          <div className="collapsible-body">
-                            We accept various payment methods, including credit
-                            cards, and bank transfers. Contact us if you have
-                            any other method
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <AccordianComponent
+                      heading="How do I purchase a package?"
+                      content="To purchase a package, Click on any package and
+                            enter your payment details. that's it"
+                    />
+                    <AccordianComponent
+                      heading="Is it possible to request a refund if we don't like
+                            the product?"
+                      content="Yes, you can get refund within three days of
+                      purchase. For refunds, please contact us via live
+                      support. After you sign up, you will have access to
+                      live support."
+                    />
+                    <AccordianComponent
+                      heading="What methods of payment do you accept?"
+                      content="We accept various payment methods, including credit
+                      cards, and bank transfers. Contact us if you have
+                      any other method"
+                    />
                   </div>
                 </div>
               </div>

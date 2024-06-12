@@ -892,7 +892,7 @@ function page() {
                           data-animation-offset="150"
                           data-animation-duration="600"
                         >
-                          <span className="wpr-label">Jan 2023</span>
+                          <span className="wpr-label">Jan 2024</span>
                           <span className="wpr-sub-label">
                             Office 4165, 58 Peregrine Road, Hainault, Ilford,
                             Essex, United Kingdom, IG6 3SZ
@@ -944,7 +944,7 @@ function page() {
                           data-animation-offset="150"
                           data-animation-duration="600"
                         >
-                          <span className="wpr-label">March 2023</span>
+                          <span className="wpr-label">March 2024</span>
                         </time>
                         <div className="wpr-timeline-entry-inner">
                           <div className="wpr-main-line-icon wpr-icon">
@@ -991,7 +991,7 @@ function page() {
                           data-animation-offset="150"
                           data-animation-duration="600"
                         >
-                          <span className="wpr-label">April 2023</span>
+                          <span className="wpr-label">April 2024</span>
                         </time>
                         <div className="wpr-timeline-entry-inner">
                           <div className="wpr-main-line-icon wpr-icon">
@@ -1035,7 +1035,7 @@ function page() {
                           data-animation-offset="150"
                           data-animation-duration="600"
                         >
-                          <span className="wpr-label">April 2023</span>
+                          <span className="wpr-label">April 2024</span>
                         </time>
                         <div className="wpr-timeline-entry-inner">
                           <div className="wpr-main-line-icon wpr-icon">
