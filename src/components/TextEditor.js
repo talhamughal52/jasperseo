@@ -3,6 +3,7 @@ import { saveEditorContent } from "@/lib/actions/editor.actions";
 import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { htmlToText } from "html-to-text";
 
 const TextEditor = ({
   contentEditor,
@@ -45,7 +46,16 @@ const TextEditor = ({
     "video",
   ];
 
-  const tagsAnalysis = (editorContent) => {
+  const tagsAnalysis = (content) => {
+    let editorContent = "";
+
+    const text = htmlToText(content, {
+      wordwrap: false,
+    }).trim();
+    if (text) {
+      editorContent = content;
+    }
+
     let h1Tags = editorContent.match(/<h1[^>]*>/gi);
     let h1Count = h1Tags ? h1Tags.length : 0;
     let h2Tags = editorContent.match(/<h2[^>]*>/gi);
@@ -62,7 +72,15 @@ const TextEditor = ({
     let imageTags = editorContent.match(/<img[^>]*>/gi);
     let imageCount = imageTags ? imageTags.length : 0;
     // Count words
-    let wordCount = editorContent.trim().split(/\s+/).length;
+    // let wordCount = editorContent.trim().split(/\s+/).length;
+    let wordCount = 0;
+
+    if (text) {
+      wordCount = editorContent.trim().split(/\s+/).length;
+    } else {
+      wordCount = 0;
+    }
+
     // Count paragraphs
     let paragraphCount =
       editorContent.replace(/<\/p>/gi, "").split(/<p[^>]*>/gi).length - 1;
@@ -101,7 +119,8 @@ const TextEditor = ({
         });
       }
     }
-    total_completed = Math.floor((total_completed / tokens.length) * 33);
+    total_completed = Math.round((total_completed / tokens.length) * 33);
+
     let headingsScore = 0;
     let lines = editorContent.split("\n");
     let firstLine = lines[0];
@@ -116,19 +135,19 @@ const TextEditor = ({
     } else if (isFirstLineH1) {
       headingsScore += 5;
     }
-    if (h2Count >= structure.h2.min) {
+    if (h2Count >= structure.h2.min && structure.h2.min > 0) {
       headingsScore += 2;
     }
-    if (h3Count >= structure.h3.min) {
+    if (h3Count >= structure.h3.min && structure.h3.min > 0) {
       headingsScore += 2;
     }
-    if (h4Count >= structure.h4.min) {
+    if (h4Count >= structure.h4.min && structure.h4.min > 0) {
       headingsScore += 2;
     }
-    if (h5Count >= structure.h5.min) {
+    if (h5Count >= structure.h5.min && structure.h5.min > 0) {
       headingsScore += 2;
     }
-    if (h6Count >= structure.h6.min) {
+    if (h6Count >= structure.h6.min && structure.h6.min > 0) {
       headingsScore += 2;
     }
     let wordsScore = 0;
