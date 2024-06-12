@@ -1,5 +1,5 @@
 import Box from "@/components/Box";
-import AccordianComponent from "@/components/accordianComponent";
+import AccordianComponent from "@/components/AccordianComponent";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 
