@@ -314,7 +314,10 @@ function Footer() {
                 <div className="elementor-widget-container">
                   <p>
                     © 2024 All Right Reserved | Developed by{" "}
-                    <a href="www.linkedin.com/in/talhamughal52" target="_blank">
+                    <a
+                      href="https://www.linkedin.com/in/talhamughal52"
+                      target="_blank"
+                    >
                       Talha Younas
                     </a>
                   </p>
