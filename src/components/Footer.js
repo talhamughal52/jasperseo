@@ -312,7 +312,12 @@ function Footer() {
                 data-widget_type="text-editor.default"
               >
                 <div className="elementor-widget-container">
-                  <p>©2024 All Right Reserved</p>
+                  <p>
+                    ©2024 All Right Reserved | Developed by{" "}
+                    <a href="www.linkedin.com/in/talhamughal52" target="_blank">
+                      Talha Younas
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
