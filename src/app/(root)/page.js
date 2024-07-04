@@ -184,53 +184,6 @@ export default function Home() {
             <div className="elementor-widget-wrap"></div>
           </div>
         </div>
-        <div
-          className="wpr-parallax-multi-layer"
-          scalar-speed="10"
-          direction="no"
-          style={{
-            overflow: "hidden",
-            transform: "translate3d(0px, 0px, 0px) rotate(0.0001deg)",
-            transformStyle: "preserve-3d",
-            backfaceVisibility: "hidden",
-            position: "absolute",
-          }}
-        >
-          <div
-            data-depth="0.4"
-            style-top="15%"
-            style-left="73%"
-            className="wpr-parallax-ml-children elementor-repeater-item-1a65dae"
-            style={{
-              transform: "translate3d(-25.5px, 6.7px, 0px)",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "hidden",
-              position: "relative",
-              display: "block",
-              left: "0px",
-              top: "0px",
-            }}
-          >
-            <img decoding="async" src="/rectangle-1.png" />
-          </div>
-          <div
-            data-depth="0.4"
-            style-top="86%"
-            style-left="20%"
-            className="wpr-parallax-ml-children elementor-repeater-item-fad39dd"
-            style={{
-              transform: "translate3d(-25.5px, 6.7px, 0px)",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "hidden",
-              position: "absolute",
-              display: "block",
-              left: "0px",
-              top: "0px",
-            }}
-          >
-            <img decoding="async" src="/Polygon-1.png" />
-          </div>
-        </div>
       </section>
       <section
         className="elementor-section elementor-top-section elementor-element elementor-element-6657251 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no"

@@ -1,4 +1,3 @@
-import Box from "@/components/Box";
 import ContactForm from "@/components/ContactForm";
 import "@/css/contact.css";
 
@@ -47,60 +46,6 @@ export default function page() {
             </div>
           </div>
         </div>
-        {/* <Box /> */}
-        {/* <div
-          className="wpr-parallax-multi-layer"
-          scalar-speed="10"
-          direction="no"
-          style={{
-            overflow: "hidden",
-            transform: "translate3d(0px, 0px, 0px) rotate(0.0001deg)",
-            transformStyle: "preserve-3d",
-            backfaceVisibility: "hidden",
-            position: "absolute",
-          }}
-        >
-          <div
-            data-depth="0.4"
-            style-top="30%"
-            style-left="40%"
-            className="wpr-parallax-ml-children elementor-repeater-item-471af14"
-            style={{
-              transform: "translate3d(0px, 0px, 0px)",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "hidden",
-              position: "relative",
-              display: "block",
-              left: "0px",
-              top: "0px",
-            }}
-          >
-            <img
-              decoding="async"
-              src="/rectangle-1.png"
-            />
-          </div>
-          <div
-            data-depth="0.4"
-            style-top="72%"
-            style-left="20%"
-            className="wpr-parallax-ml-children elementor-repeater-item-acf2ce0"
-            style={{
-              transform: "translate3d(0px, 0px, 0px)",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "hidden",
-              position: "absolute",
-              display: "block",
-              left: "0px",
-              top: "0px",
-            }}
-          >
-            <img
-              decoding="async"
-              src="/Polygon-1.png"
-            />
-          </div>
-        </div> */}
       </section>
       <section
         className="elementor-section elementor-top-section elementor-element elementor-element-bfd7705 elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no"
